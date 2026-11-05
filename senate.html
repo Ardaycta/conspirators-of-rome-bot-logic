@@ -1,0 +1,3467 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Conspirators of Rome</title>
+<style>
+:root{
+  --ink:#26211b;
+  --ink-dim:#5c5346;
+  --ground:#f2ede1;
+  --panel:#ffffff;
+  --panel-2:#e9e1d0;
+  --line:#d9cfb8;
+  --gold:#a4791f;
+  --gold-strong:#8a6316;
+  --tyrian:#5b2333;
+  --tyrian-strong:#421826;
+  --republic:#3f6b4e;
+  --republic-strong:#2e5039;
+  --imperium:#8c2f26;
+  --imperium-strong:#6f231b;
+  --shadow: 0 10px 30px -12px rgba(38,33,27,0.35);
+  --font-display:'Cinzel', Georgia, 'Times New Roman', serif;
+  --font-body:'Crimson Pro', Georgia, serif;
+  --font-mono:'JetBrains Mono', 'Courier New', monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#ece3d0;
+    --ink-dim:#b9ac91;
+    --ground:#1c1712;
+    --panel:#26201a;
+    --panel-2:#332a20;
+    --line:#4a3f30;
+    --gold:#d1a83f;
+    --gold-strong:#e6c264;
+    --tyrian:#c76a83;
+    --tyrian-strong:#e08aa1;
+    --republic:#6fae86;
+    --republic-strong:#8fcaa4;
+    --imperium:#e2685a;
+    --imperium-strong:#f08d81;
+    --shadow: 0 10px 34px -10px rgba(0,0,0,0.6);
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ece3d0;
+  --ink-dim:#b9ac91;
+  --ground:#1c1712;
+  --panel:#26201a;
+  --panel-2:#332a20;
+  --line:#4a3f30;
+  --gold:#d1a83f;
+  --gold-strong:#e6c264;
+  --tyrian:#c76a83;
+  --tyrian-strong:#e08aa1;
+  --republic:#6fae86;
+  --republic-strong:#8fcaa4;
+  --imperium:#e2685a;
+  --imperium-strong:#f08d81;
+  --shadow: 0 10px 34px -10px rgba(0,0,0,0.6);
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--font-body);
+  min-height:100%;
+}
+#app{
+  max-width:560px;
+  margin:0 auto;
+  padding:20px 16px calc(24px + env(safe-area-inset-bottom,0px));
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+h1,h2,h3{
+  font-family:var(--font-display);
+  letter-spacing:0.02em;
+  margin:0;
+  text-wrap:balance;
+}
+h1{font-size:1.5rem;}
+h2{font-size:1.15rem;}
+h3{font-size:.95rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-dim);}
+p{margin:0; line-height:1.5;}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold-strong);
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:20px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.stack{display:flex;flex-direction:column;gap:10px;}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.spread{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+button{
+  font-family:var(--font-body);
+  font-size:1rem;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  color:var(--ink);
+  padding:14px 18px;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .08s ease, background .15s ease, border-color .15s ease;
+}
+button:active{transform:scale(0.97);}
+button.primary{
+  background:var(--tyrian);
+  border-color:var(--tyrian-strong);
+  color:#fff8ee;
+  font-family:var(--font-display);
+  letter-spacing:.03em;
+}
+button.gold{
+  background:var(--gold);
+  border-color:var(--gold-strong);
+  color:#2a1e05;
+  font-family:var(--font-display);
+}
+button.ghost{background:transparent;}
+button.danger{background:var(--imperium);border-color:var(--imperium-strong);color:#fff3ef;}
+button.full{width:100%;}
+button:disabled{opacity:.4;cursor:not-allowed;}
+input[type=text]{
+  font-family:var(--font-body);
+  font-size:1rem;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  color:var(--ink);
+  width:100%;
+}
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  padding:4px 10px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--panel-2);
+  color:var(--ink-dim);
+  white-space:nowrap;
+}
+.pill.on{background:var(--tyrian);border-color:var(--tyrian-strong);color:#fff8ee;}
+.notices{gap:6px;}
+.pill.notice{display:flex;align-items:center;gap:5px;border-color:var(--gold-strong);color:var(--gold-strong);}
+.pill.notice svg{width:12px;height:12px;flex-shrink:0;}
+.trackwrap{display:flex;flex-direction:column;gap:8px;}
+.track{display:flex;gap:6px;flex-wrap:wrap;}
+.trackcard{
+  flex:1 1 40px;
+  min-width:40px;
+  max-width:58px;
+  aspect-ratio:5/7;
+  border-radius:7px;
+  border:2px dashed var(--line);
+  background:var(--panel-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  font-family:var(--font-mono);
+  font-size:.62rem;
+  color:var(--ink-dim);
+  position:relative;
+}
+.trackcard.filled{border-style:solid;}
+.trackcard.filled.rp{background:var(--republic);border-color:var(--republic-strong);color:#f4fff0;}
+.trackcard.filled.im{background:var(--imperium);border-color:var(--imperium-strong);color:#fff3ef;}
+.trackcard .ticon{width:16px;height:16px;flex-shrink:0;}
+.trackcard .ticon svg{width:100%;height:100%;display:block;}
+.trackcard .tlabel{
+  font-family:var(--font-display);
+  font-size:.52rem;
+  letter-spacing:.02em;
+  text-align:center;
+  line-height:1.1;
+}
+.trackcard .tnote{
+  font-family:var(--font-mono);
+  font-size:.46rem;
+  letter-spacing:.02em;
+  opacity:.8;
+  text-align:center;
+  line-height:1;
+  cursor:default;
+}
+.trackcard.power:not(.filled){border-color:var(--gold-strong);color:var(--gold-strong);}
+.trackcard.win:not(.filled){border-color:var(--tyrian-strong);color:var(--tyrian);border-style:solid;}
+.trackcard.danger{box-shadow:inset 0 -4px 0 0 #8b1a1a;}
+.trackcard.danger:not(.filled){border-color:#8b1a1a;}
+.trackcard .tdanger{
+  font-family:var(--font-display);
+  font-size:.46rem;
+  letter-spacing:.03em;
+  color:#8b1a1a;
+  text-transform:uppercase;
+  text-align:center;
+  line-height:1;
+}
+.trackcard.deck{border-style:solid;flex:0 0 64px;max-width:64px;}
+.trackcard.deck .tcount{
+  font-family:var(--font-mono);
+  font-size:.95rem;
+  font-variant-numeric:tabular-nums;
+  color:var(--ink);
+}
+.statusbar{
+  position:relative;
+  display:flex; flex-direction:column; gap:12px;
+  background:var(--panel); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; box-shadow:var(--shadow);
+}
+.topvote{
+  position:absolute; bottom:10px; right:14px;
+  display:flex; align-items:center; gap:6px;
+  padding:4px 8px; background:rgba(0,0,0,0.15); border-radius:8px;
+  font-size:12px; z-index:5;
+}
+.topvote-label{ font-size:11px; opacity:.85; white-space:nowrap; margin-right:2px; }
+.topvote-btn{
+  font-size:11px; padding:3px 8px; border-radius:6px;
+  border:1px solid rgba(255,255,255,0.25); background:transparent; color:inherit;
+  cursor:pointer; line-height:1.2; font-family:var(--font-body);
+}
+.topvote-btn:hover{ border-color:rgba(255,255,255,0.5); }
+.topvote .chosen-aye{ background:var(--republic); border-color:var(--republic-strong); color:#fff; }
+.topvote .chosen-nay{ background:var(--imperium); border-color:var(--imperium-strong); color:#fff; }
+.avatar{
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:50%; color:#fff; font-weight:700; font-family:var(--font-body);
+  text-transform:uppercase; flex-shrink:0; line-height:1;
+}
+.overlay{
+  position:fixed; inset:0; background:var(--ground);
+  display:flex; align-items:center; justify-content:center;
+  padding:24px calc(16px + env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) calc(16px + env(safe-area-inset-left,0px));
+  padding-top:calc(24px + env(safe-area-inset-top,0px));
+  z-index:50;
+}
+.overlay .card{max-width:420px;width:100%;text-align:center;}
+.role-badge{
+  font-family:var(--font-display);
+  font-size:1.4rem;
+  padding:18px 10px;
+  border-radius:10px;
+  letter-spacing:.03em;
+}
+.role-senator{background:var(--republic);color:#f4fff0;}
+.role-conspirator{background:var(--imperium);color:#fff3ef;}
+.role-imperator{background:var(--tyrian);color:#fff8ee;}
+.decree-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.decree{
+  width:82px;height:112px;border-radius:8px;border:2px solid var(--line);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--font-display);font-size:.75rem;padding:8px;cursor:pointer;
+  background:var(--panel-2);
+}
+.decree.rp{border-color:var(--republic-strong);}
+.decree.im{border-color:var(--imperium-strong);}
+.decree:active{transform:scale(.96);}
+.decree.selected{box-shadow:0 0 0 3px var(--gold-strong); border-color:var(--gold-strong);}
+.voterow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);}
+.voterow:last-child{border-bottom:none;}
+.togglepair{display:flex;gap:6px;}
+.togglepair button{padding:8px 14px;font-size:.85rem;}
+.togglepair button.chosen-aye{background:var(--republic);border-color:var(--republic-strong);color:#f4fff0;}
+.togglepair button.chosen-nay{background:var(--imperium);border-color:var(--imperium-strong);color:#fff3ef;}
+.log{
+  font-family:var(--font-mono); font-size:.72rem; color:var(--ink-dim);
+  display:flex;flex-direction:column;gap:4px; max-height:140px; overflow-y:auto;
+  border-top:1px solid var(--line); padding-top:10px;
+}
+.center{text-align:center;}
+.small{font-size:.82rem;color:var(--ink-dim);}
+.small.warn{color:#8b1a1a;font-weight:600;}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .small.warn{color:#f08d81;} }
+:root[data-theme="dark"] .small.warn{color:#f08d81;}
+details.card{padding:16px 20px;}
+details.card summary{cursor:pointer;font-family:var(--font-display);font-size:1.02rem;color:var(--ink);list-style:none;}
+details.card summary::-webkit-details-marker{display:none;}
+details.card summary::before{content:'\25B8 ';color:var(--gold-strong);}
+details.card[open] summary::before{content:'\25BE ';}
+details.card[open]{gap:10px;}
+details.card > *:not(summary){font-size:.82rem;color:var(--ink-dim);line-height:1.5;}
+details.card > div{margin-top:4px;}
+.card details:not(.card){margin-top:2px;}
+.card details:not(.card) summary{cursor:pointer;font-family:var(--font-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-strong);list-style:none;}
+.card details:not(.card) summary::-webkit-details-marker{display:none;}
+.card details:not(.card) summary::before{content:'\25B8 ';}
+.card details:not(.card)[open] summary::before{content:'\25BE ';}
+.card details:not(.card) > div{font-size:.82rem;color:var(--ink-dim);line-height:1.5;margin-top:8px;}
+.playerchip{
+  padding:10px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--panel-2); display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+.playerchip.dead{opacity:.45;text-decoration:line-through;}
+.seats{display:flex;flex-wrap:wrap;gap:8px;}
+.seat{
+  padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);
+  background:var(--panel-2); display:flex;flex-direction:column;align-items:center;gap:4px;
+  min-width:68px; text-align:center;
+}
+.seat.dead{opacity:.4;}
+.seat.dead .seatname{text-decoration:line-through;}
+.seat.princeps{border-color:var(--gold-strong);box-shadow:0 0 0 1px var(--gold-strong) inset;}
+.seat.consul{border-color:var(--tyrian-strong);box-shadow:0 0 0 1px var(--tyrian-strong) inset;}
+.seat.princeps.consul{box-shadow:0 0 0 1px var(--gold-strong) inset, 0 0 0 3px var(--tyrian-strong) inset;}
+.seatname{font-family:var(--font-body);font-size:.82rem;color:var(--ink);}
+.seatyou{font-family:var(--font-mono);font-size:.62rem;color:var(--ink-dim);}
+.seatbadges{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;}
+.seatbadge{
+  font-family:var(--font-display);font-size:.56rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:2px 7px;border-radius:6px;color:#fff8ee;
+}
+.seatbadge.princeps{background:var(--gold-strong);}
+.seatbadge.consul{background:var(--tyrian-strong);}
+.namebtn{
+  text-align:left; background:var(--panel-2); border:1px solid var(--line);
+  border-radius:10px; padding:14px 16px; font-family:var(--font-body); font-size:1rem;
+}
+.namebtn.selected{background:var(--tyrian);border-color:var(--tyrian-strong);color:#fff8ee;}
+.select{
+  width:100%; background:var(--panel-2); border:1px solid var(--line); border-radius:10px;
+  padding:10px 12px; font-family:var(--font-body); font-size:.9rem; color:var(--ink);
+  margin:10px 0;
+}
+.speechBubble{
+  display:flex; align-items:flex-start; gap:10px;
+  background:var(--panel-2); border:1px solid var(--gold-strong); border-radius:12px;
+  padding:10px 14px; margin:0 0 12px 0;
+}
+.speechBubbleBody{display:flex; flex-direction:column; gap:2px; min-width:0;}
+.speechBubbleName{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.06em; color:var(--gold-strong); text-transform:uppercase;}
+.speechBubbleText{font-size:.92rem; font-style:italic; color:var(--ink); word-wrap:break-word;}
+.badge-consul{color:var(--gold-strong);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;}
+.tutorialCallout{
+  position:relative;
+  border:1.5px solid var(--gold-strong);
+  background:var(--panel-2);
+  border-radius:10px;
+  padding:12px 14px 14px;
+  margin:2px 0 14px 0;
+}
+.tutorialCallout .eyebrow{margin-bottom:2px;}
+.tutorialCallout .calloutArrow{
+  position:absolute; left:26px; bottom:-8px;
+  width:15px; height:15px;
+  background:var(--panel-2);
+  border-right:1.5px solid var(--gold-strong);
+  border-bottom:1.5px solid var(--gold-strong);
+  transform:rotate(45deg);
+}
+.notesCard{padding:8px 14px; margin-bottom:12px;}
+.notesCard summary{font-family:var(--font-mono); font-size:.72rem;letter-spacing:.05em; text-transform:uppercase; color:var(--gold-strong); cursor:pointer; padding:4px 0;}
+.waxTablet{
+  width:100%; min-height:56px; max-height:160px; resize:vertical; margin-top:8px;
+  background:linear-gradient(var(--panel-2),var(--panel-2)), repeating-linear-gradient(var(--panel-2) 0 27px, var(--line) 27px 28px);
+  background-blend-mode:normal; border:1px solid var(--line); border-radius:8px;
+  padding:8px 10px; font-family:var(--font-body); font-size:.85rem; line-height:1.5;
+  color:var(--ink); box-shadow:inset 0 1px 4px rgba(0,0,0,.25);
+}
+.waxTablet::placeholder{color:var(--ink-dim,#9a8f7d); opacity:.7;}
+.dots{display:inline-flex;gap:4px;vertical-align:middle;}
+.dots span{width:6px;height:6px;border-radius:50%;background:var(--gold-strong);opacity:.35;animation:pulse 1.1s infinite ease-in-out;}
+.dots span:nth-child(2){animation-delay:.15s;}
+.dots span:nth-child(3){animation-delay:.3s;}
+@keyframes pulse{0%,80%,100%{opacity:.25;transform:scale(.8);}40%{opacity:1;transform:scale(1);}}
+@media (prefers-reduced-motion: reduce){.dots span{animation:none;opacity:.7;}}
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+</style>
+
+<div id="app"></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- Fonts ---------- */
+var link1=document.createElement('link');
+link1.rel='stylesheet';
+link1.href='https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap';
+document.head.appendChild(link1);
+
+/* ---------- Constants ---------- */
+var ROLE_COUNTS = {
+  5:{senator:3,conspirator:1,imperator:1},
+  6:{senator:4,conspirator:1,imperator:1},
+  7:{senator:4,conspirator:2,imperator:1},
+  8:{senator:5,conspirator:2,imperator:1},
+  9:{senator:5,conspirator:3,imperator:1},
+  10:{senator:6,conspirator:3,imperator:1}
+};
+var POWER_TABLE = {
+  micro:{3:'investigate',4:'proscribe'},              // 2-4 players
+  small:{3:'investigate',4:'proscribe',5:'proscribe'}, // 5-6 players — Foresight replaced with Investigate Loyalty, matching the 2-4 player deck
+  mid:{2:'investigate',3:'special_election',4:'proscribe',5:'proscribe'}, // 7-8
+  large:{1:'investigate',2:'investigate',3:'special_election',4:'proscribe',5:'proscribe'} // 9-10
+};
+// Short, dismissible, non-blocking pop-up tips for the Tutorial. Each tip is
+// tied to a specific S.phase AND rendered inline, right next to the exact
+// control it explains — with a small arrow pointing at it — instead of as a
+// generic banner floating above the whole screen. TUTORIAL_TIP_ORDER fixes
+// the sequence; a phase can have more than one tip (e.g. 'nominate' shows
+// the status-bar/track explainer before the nominate-list one), and only the
+// single next unseen tip whose phase matches S.phase is ever shown at once,
+// so a first-time player is never shown more than one thing to read at a
+// time. Dismissing (or just acting) marks that one tip seen for good —
+// nothing here ever blocks the underlying action.
+var TUTORIAL_TIP_ORDER = ['track','nominate','vote','princeps_draw','consul_draw','power_intro'];
+var TUTORIAL_TIPS = {
+  track: {
+    phase: 'nominate',
+    text: 'This is the status bar: your role, who\'s Princeps and Consul this round, and the two tracks below — Res Publica for the Senate, Imperium for the Conspiracy. Whichever track fills up first decides who wins, so keep an eye on it all game.'
+  },
+  nominate: {
+    phase: 'nominate',
+    text: 'You\'re the Princeps this round. Tap anyone below to nominate them as Consul — there\'s no wrong answer yet, you\'ll get better clues as the game goes on — then put it to a vote.'
+  },
+  vote: {
+    phase: 'vote',
+    text: 'Everyone votes out loud, so every vote (including the bots\', shown as you look) is visible. Use the Aye/Nay buttons on your own row below. Aye confirms that Princeps &amp; Consul pair; Nay rejects them — vote however you honestly feel, the bots are watching how you vote, too.'
+  },
+  princeps_draw: {
+    phase: 'legis_princeps_draw',
+    text: 'You\'re the Princeps: you see 3 decrees below. Tap 2 of them to hand to the Consul — the one you leave unpicked is discarded, unseen by anyone else.'
+  },
+  consul_draw: {
+    phase: 'legis_consul_draw',
+    text: 'You\'re the Consul: tap the 1 decree below you want to enact. The other is discarded, unseen by anyone else — and whichever you enact moves one of the tracks up top.'
+  },
+  power_intro: {
+    phase: 'power_intro',
+    text: 'Enough Imperium Decrees just unlocked a power for the Princeps — tap Continue below to use it, it\'s a real edge.'
+  }
+};
+// The single next tip to show right now, or null — always at most one on
+// screen at a time, and only ever for the tutorial.
+function activeTutorialTip(){
+  if(!S.tutorialMode) return null;
+  for(var i=0;i<TUTORIAL_TIP_ORDER.length;i++){
+    var id = TUTORIAL_TIP_ORDER[i];
+    var tip = TUTORIAL_TIPS[id];
+    if(tip.phase===S.phase && !S.tutorialSeen[id]) return id;
+  }
+  return null;
+}
+// Rendered inline, immediately before the exact control it explains — the
+// little rotated-square "calloutArrow" sits on its bottom edge, pointing
+// down at whatever comes right after it in the page.
+function tutorialCalloutHtml(id){
+  var tip = TUTORIAL_TIPS[id];
+  if(!tip) return '';
+  return '<div class="tutorialCallout"><div class="eyebrow">Tutorial</div><p class="small">'+tip.text+'</p>' +
+    '<button class="ghost full" data-tutorial-dismiss="'+id+'">Got it</button>' +
+    '<div class="calloutArrow"></div></div>';
+}
+
+var POWER_LABEL = {
+  investigate:'Investigate Loyalty',
+  special_election:'Call Special Comitia',
+  peek:'Foresight',
+  proscribe:'Proscribe'
+};
+var POWER_ICON = {
+  investigate:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
+  proscribe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v11"/><path d="M8 6h8"/><path d="M12 13l-4 4 4 5 4-5-4-4Z"/></svg>',
+  peek:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><path d="M21 21l-5.5-5.5"/></svg>',
+  special_election:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l4-6h10l4 6"/><path d="M12 13v4"/></svg>'
+};
+var DECK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="14" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2"/></svg>';
+var WIN_ICON = {
+  rp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c0-7 3-13 8-16"/><path d="M20 20c0-7-3-13-8-16"/><path d="M5 16l3-1"/><path d="M5 12l3-1"/><path d="M6 8l3-1"/><path d="M19 16l-3-1"/><path d="M19 12l-3-1"/><path d="M18 8l-3-1"/></svg>',
+  im:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16"/><path d="M4 18l1.5-9L9 12l3-6 3 6 3.5-3L20 18"/></svg>'
+};
+var ROMAN_BOT_NAMES = ['Marcus','Gaius','Lucius','Quintus','Titus','Brutus','Cassius','Cicero','Cato','Drusus','Flavius','Servius','Aulus','Numerius'];
+
+function smallGame(){ return S.count<=4; }
+function imWinThreshold(){ return smallGame() ? 5 : 6; }
+function vetoThreshold(){ return smallGame() ? 4 : 5; }
+function powerTier(n){
+  if(n<=4) return 'micro';
+  if(n<=6) return 'small';
+  if(n<=8) return 'mid';
+  return 'large';
+}
+function roleLabel(role){
+  return role==='senator'?'Senator':(role==='conspirator'?'Conspirator':'The Imperator');
+}
+function roleClass(role){
+  return role==='senator'?'role-senator':(role==='conspirator'?'role-conspirator':'role-imperator');
+}
+
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i];a[i]=a[j];a[j]=t;
+  }
+  return a;
+}
+
+function freshDeck(){
+  var d=[];
+  for(var i=0;i<7;i++)d.push('RP');
+  for(var i=0;i<14;i++)d.push('IM');
+  return shuffle(d);
+}
+
+/* ---------- State ---------- */
+var S = {
+  phase:'setup',
+  count:5,
+  includeImperator:true,
+  humanName:'',
+  speed:'off', // 'off' (click Continue everywhere, original pacing), 'slow' (4s auto-advance), 'fast' (2s auto-advance) — action-required screens are never auto-advanced
+  difficulty:'medium', // 'easy'|'medium'|'hard'|'impossible' — see DIFFICULTY_TABLE. Only ever changes how good the BOT seats play; your own seat is unaffected.
+  historySaved:false, // guards against saving the same finished game to history more than once
+  players:[], // {id,name,role,team,allies,intel,alive,isHuman,investigated}
+  revealShown:false,
+  princepsIndex:0,
+  consulId:null,
+  nomineeId:null,
+  previousConsulId:null,
+  previousPrincepsId:null,
+  votes:{}, // id -> true/false
+  electionTracker:0,
+  rp:0, // res publica enacted
+  im:0, // imperium enacted
+  deck:[],
+  discardPile:[],
+  drawnThree:[],
+  handedTwo:[],
+  vetoRequested:false,
+  pendingPower:null,
+  investigateTargetId:null,
+  investigateResult:null,
+  specialElectionPicked:null,
+  specialElectionActive:false,
+  proscribeTargetId:null,
+  peekCards:[],
+  thinkingLabel:'',
+  lastSpeech:null, // {name, text} — most recent dialogue line, shown openly (not just in the log) while it's fresh
+  log:[],
+  winner:null,
+  winReason:'',
+  betrayal:null,
+  investigateLog:[], // {investigatorName, targetName, result}
+  peekLog:[], // {name}
+  publicNotices:[], // {text, roundsLeft} - visible to everyone for a few rounds, e.g. who got investigated
+  investigateVouches:{}, // targetId -> [{investigatorId, claimedLoyal}], see markConfirmedEnemy
+  enactmentHistory:[], // per enacted card, in order: {card:'RP'|'IM', princepsName, consulName, isChaos} — who enacted each one, shown as a small note on the track
+  personalNotes:'', // the human player's private freeform notes — never carried forward to a new game
+  proscribeConfirmId:null, // set while the human is on the "are you sure" secondary step, not preventive — just one extra tap
+  proscribePendingClaim:null,
+  tutorialMode:false,
+  tutorialStep:0,
+  tutorialSeen:{},
+  discardSelection:[], // Princeps draw: indices (into S.drawnThree) of the 2 cards being pushed forward to the Consul — the 1 left unselected is discarded
+  enactSelection:null  // Consul draw: index (into S.handedTwo) of the 1 card being pushed forward to enact — the other is discarded
+};
+
+function alivePlayers(){ return S.players.filter(function(p){return p.alive;}); }
+function byId(id){ return S.players.filter(function(p){return p.id===id;})[0]; }
+function humanPlayer(){ return S.players.filter(function(p){return p.isHuman;})[0]; }
+function isHuman(p){ return !!(p && p.isHuman); }
+function pushLog(msg){ S.log.unshift(msg); }
+
+// Difficulty only ever adjusts how good the OTHER bot seats are — never the
+// human's own decisions (there's no dial for those). "Teammate" bots share
+// the human's team (senate or conspiracy, whichever the human was dealt);
+// "opponent" bots are on the other team. Each tier is the probability a bot
+// uses its real, strategic decision logic on any given call; the rest of
+// the time it falls through to a naive/random fallback baked into that same
+// function (see smartRoll's call sites: botChooseNominee, botVoteChoice,
+// botDiscardChoice, botEnactChoice, botVetoChoice, the veto-propose trigger
+// in princepsDiscard, botInvestigateChoice, botSpecialChoice, botProscribeChoice).
+var SKILL_TIERS = {
+  perfect: 1.00, // "impossible" opponents — plays almost perfectly
+  great:   0.90, // "easy" teammates / "hard" opponents
+  average: 0.65, // "medium" teammates and opponents
+  bad:     0.30, // "easy" opponents / "hard" teammates
+  poor:    0.12  // "impossible" teammates — not so sensible
+};
+var DIFFICULTY_TABLE = {
+  easy:       {teammate:'great',   opponent:'bad'},
+  medium:     {teammate:'average', opponent:'average'},
+  hard:       {teammate:'bad',     opponent:'great'},
+  impossible: {teammate:'poor',    opponent:'perfect'}
+};
+function botSkillProb(bot){
+  // Guided first game: every bot always plays its true side optimally —
+  // no "difficulty" randomness at all. Without this, a genuinely honest
+  // Senator could still randomly enact Imperium (or a Conspirator randomly
+  // enact Res Publica) on a failed skill roll, which looks exactly like
+  // deception to a brand-new player even though it's just simulated
+  // carelessness. Combined with sleepers/bluffing being off, tutorial bots
+  // behave with zero noise — the cleanest possible signal to learn from.
+  if(S.tutorialMode) return 1;
+  var h = humanPlayer();
+  if(!h) return 1; // no seated human (shouldn't happen mid-game) — default to full skill
+  var tiers = DIFFICULTY_TABLE[S.difficulty] || DIFFICULTY_TABLE.medium;
+  var tierName = (bot.team===h.team) ? tiers.teammate : tiers.opponent;
+  var prob = SKILL_TIERS[tierName];
+  return prob===undefined ? 1 : prob;
+}
+function smartRoll(bot){
+  return Math.random() < botSkillProb(bot);
+}
+
+/* ---------- Game history (last 3 games, saved to this browser only) ---------- */
+var GAME_HISTORY_KEY = 'conspirators_of_rome_history_v1';
+var GAME_HISTORY_MAX = 3;
+
+function buildGameRecord(){
+  return {
+    timestamp: Date.now(),
+    count: S.count,
+    includeImperator: S.includeImperator,
+    winner: S.winner,
+    winReason: S.winReason,
+    players: S.players.map(function(p){
+      return {name:p.name, role:p.role, team:p.team, isHuman:!!p.isHuman, alive:p.alive};
+    }),
+    investigateLog: S.investigateLog.slice(),
+    peekLog: S.peekLog.slice(),
+    log: S.log.slice().reverse(), // chronological, oldest first — the FULL record, not the 12-line display window
+    // Final trust readings: each living player's own private, subjective
+    // suspicion score (0-100, "how Conspiracy-like they look to ME") for
+    // everyone else, as it stood at game end. This is genuinely private
+    // per-observer state, never shown during play — safe to reveal only now,
+    // alongside the full role reveal.
+    // Every living player gets a card here — PLUS the human specifically,
+    // even if they were proscribed before the game ended: it's their own
+    // private reading and they should always be able to see it, unlike a
+    // bot's, which only matters while it's still shaping that bot's play.
+    suspicion: S.players.filter(function(o){ return o.alive || o.isHuman; }).map(function(observer){
+      return {
+        name: observer.name,
+        isHuman: !!observer.isHuman,
+        alive: observer.alive,
+        readings: S.players.filter(function(p){ return p.id!==observer.id; }).map(function(p){
+          var intel = observer.intel[p.id];
+          return {
+            name: p.name,
+            alive: p.alive,
+            score: Math.round(observer.suspicion[p.id]===undefined ? SUSPICION_START : observer.suspicion[p.id]),
+            confirmed: intel==='loyal' ? 'confirmed loyal' : (intel==='enemy' ? 'confirmed enemy' : null)
+          };
+        })
+      };
+    })
+  };
+}
+
+function saveGameToHistory(){
+  try{
+    var record = buildGameRecord();
+    var existing = loadGameHistory();
+    existing.unshift(record);
+    if(existing.length > GAME_HISTORY_MAX) existing = existing.slice(0, GAME_HISTORY_MAX);
+    localStorage.setItem(GAME_HISTORY_KEY, JSON.stringify(existing));
+  }catch(e){ /* localStorage unavailable, full, or blocked — never let history saving break the game */ }
+}
+
+function loadGameHistory(){
+  try{
+    var raw = localStorage.getItem(GAME_HISTORY_KEY);
+    var parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  }catch(e){ return []; }
+}
+
+function copyTextToClipboard(text, btn){
+  function flash(ok){
+    if(!btn) return;
+    var original = btn.getAttribute('data-original-label') || btn.textContent;
+    btn.setAttribute('data-original-label', original);
+    btn.textContent = ok ? 'Copied!' : 'Copy failed — try selecting the text manually';
+    setTimeout(function(){ btn.textContent = original; }, 1800);
+  }
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){ flash(true); }).catch(function(){ flash(false); });
+      return;
+    }
+  }catch(e){}
+  try{
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    var ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    flash(ok);
+  }catch(e){ flash(false); }
+}
+
+function formatGameRecordText(record){
+  var lines = [];
+  lines.push('The Conspirators of Rome — game played ' + new Date(record.timestamp).toLocaleString());
+  lines.push(record.count + ' players' + (record.count<=4 ? (record.includeImperator?' (Imperator included)':' (Imperator omitted)') : ''));
+  lines.push('Winner: ' + (record.winner==='senate' ? 'The Senate' : 'The Conspirators'));
+  lines.push('Reason: ' + record.winReason);
+  lines.push('');
+  lines.push('Full reveal:');
+  record.players.forEach(function(p){
+    lines.push('- ' + p.name + (p.isHuman?' (you)':'') + ': ' + roleLabel(p.role) + (p.alive?'':' (removed from play)'));
+  });
+  if(record.investigateLog.length || record.peekLog.length){
+    lines.push('');
+    lines.push('Investigations & Foresight:');
+    record.investigateLog.forEach(function(e){ lines.push('- ' + e.investigatorName + ' investigated ' + e.targetName + ' -> ' + e.result); });
+    record.peekLog.forEach(function(e){ lines.push('- ' + e.name + ' used Foresight'); });
+  }
+  lines.push('');
+  lines.push('Record of the Senate:');
+  record.log.forEach(function(l){ lines.push('- ' + l); });
+  if(record.suspicion && record.suspicion.length){
+    lines.push('');
+    lines.push('Final trust readings (private per-player suspicion, 0-100, never visible during play):');
+    record.suspicion.forEach(function(observer){
+      lines.push('As seen by ' + observer.name + (observer.isHuman?' (you)':'') + ':');
+      observer.readings.slice().sort(function(a,b){ return b.score-a.score; }).forEach(function(r){
+        lines.push('  - ' + r.name + (r.alive?'':' (removed)') + ': ' + r.score + (r.confirmed?' ('+r.confirmed+')':''));
+      });
+    });
+  }
+  return lines.join('\n');
+}
+// The Senate can see WHO was investigated (it's done in the open, in front
+// of everyone) but never the result (that stays private to the
+// investigator) — visible for a few rounds, then it fades from public
+// memory like any other piece of gossip.
+function addPublicNotice(text){ S.publicNotices.push({text:text, roundsLeft:PUBLIC_NOTICE_ROUNDS}); }
+function tickPublicNotices(){
+  S.publicNotices = S.publicNotices.map(function(n){ return {text:n.text, roundsLeft:n.roundsLeft-1}; })
+    .filter(function(n){ return n.roundsLeft>0; });
+}
+
+/* ---------- Setup ---------- */
+function startSetup(){
+  render();
+}
+
+function beginReveal(){
+  var botCount = S.count-1;
+  var pool = shuffle(ROMAN_BOT_NAMES).slice(0,botCount);
+  var humanName = (S.humanName||'').trim() || 'You';
+  var names = [humanName].concat(pool);
+
+  var roles;
+  if(S.tutorialMode){
+    // Guided first game: a fixed, guaranteed deal instead of the normal
+    // random small-pool slice — 2 Senators + 1 Conspirator, always, so
+    // there's always exactly one straightforward spy to learn to spot.
+    roles = shuffle(['senator','senator','conspirator']);
+  } else if(smallGame()){
+    var pool = buildSmallPool(S.count, S.includeImperator && S.count>=3);
+    roles = shuffle(pool).slice(0, S.count);
+  } else {
+    var counts = ROLE_COUNTS[S.count];
+    roles = [];
+    for(var i=0;i<counts.senator;i++) roles.push('senator');
+    for(var i=0;i<counts.conspirator;i++) roles.push('conspirator');
+    for(var i=0;i<counts.imperator;i++) roles.push('imperator');
+    roles = shuffle(roles);
+  }
+
+  if(S.tutorialMode && roles[0]!=='senator'){
+    // Guided first game: keep it simple by always starting the human as a
+    // Senator (nothing to bluff about on turn one) — swap with whichever
+    // senator would otherwise have landed elsewhere.
+    var senatorSlot = roles.indexOf('senator');
+    if(senatorSlot!==-1){ roles[senatorSlot] = roles[0]; roles[0] = 'senator'; }
+  }
+
+  var players = names.map(function(n,i){
+    return {id:i, name:n, role:roles[i], alive:true, isHuman:(i===0)};
+  });
+  players = shuffle(players);
+  players.forEach(function(p,i){p.seat=i;});
+  players.sort(function(a,b){return a.seat-b.seat;});
+
+  players.forEach(function(p){
+    p.team = p.role==='senator' ? 'senate' : 'conspiracy';
+    p.intel = {};
+    p.investigated = false;
+    p.suspicion = {};       // targetId -> 0-100 public "looks like Conspiracy" estimate, everyone starts at 50
+    p.observedTerms = {};   // targetId -> how many legislative terms we've seen them serve (princeps or consul)
+  });
+  players.forEach(function(p){
+    // Some Conspirators (and the Imperator) start the game as "sleepers" —
+    // not every game, just a probability — who deliberately play it safe
+    // (favoring Res Publica like a Senator would) to stay below suspicion,
+    // banking trust they can spend later: staying off the proscription
+    // list, or getting waved through as Consul without scrutiny. Most
+    // Conspirators still play the honest-but-self-interested way (push
+    // Imperium whenever they can) — sleepers are the exception, not the rule.
+    // Guided first game: bots play their side plainly — Senators push
+    // Res Publica, Conspirators push Imperium, nobody fakes being the
+    // other side. No sleepers there, so the tell is always readable.
+    p.sleeper = (!S.tutorialMode) && (p.team==='conspiracy') &&
+      (Math.random() < (p.role==='imperator' ? SLEEPER_PROBABILITY_IMPERATOR : SLEEPER_PROBABILITY_CONSPIRATOR));
+    p.exposedTo = [];   // ids of living players who hold CONFIRMED intel that this player is an enemy (from an honest Investigate Loyalty)
+    p.nayVotesReceived = []; // ids of every player who has EVER voted Nay on this player as a Consul nominee — an objective, public fact (votes are cast in full view), used to retroactively vindicate early skeptics once someone confirms this player really was an enemy
+  });
+  players.forEach(function(p){
+    p.allies = p.team==='conspiracy' ? conspiratorTeammates(p, players).map(function(t){return t.id;}) : [];
+  });
+
+  S.players = players;
+  S.deck = freshDeck();
+  S.discardPile = [];
+  S.princepsIndex = 0;
+  if(S.tutorialMode){
+    // Tutorial: the player must start as Princeps — otherwise the very
+    // first thing they'd see is a bot's turn (a self-moving "Curia waits"
+    // screen) with no action of their own to anchor the tips to, which is
+    // meaningless to someone who doesn't know the game yet.
+    var humanIdx = players.findIndex(function(pl){ return pl.isHuman; });
+    if(humanIdx!==-1) S.princepsIndex = humanIdx;
+  }
+  S.revealShown = false;
+  S.phase = 'reveal';
+  S.log = ['The lots have been drawn. '+S.count+' senators enter the Curia — you, and '+botCount+' others.'];
+  render();
+}
+
+function buildSmallPool(count, includeImperator){
+  // 2 players draw from a pool of 2 Senators + 2 Conspirators.
+  // 3-4 players draw from a pool of 3 Senators + 2 Conspirators.
+  // Only as many cards as there are players are dealt — the rest sit out unseen.
+  var pool = (count<=2)
+    ? ['senator','senator','conspirator','conspirator']
+    : ['senator','senator','senator','conspirator','conspirator'];
+  if(includeImperator){
+    var idx = pool.indexOf('conspirator');
+    if(idx!==-1) pool[idx] = 'imperator';
+  }
+  return pool;
+}
+
+function conspiratorTeammates(player, playersList){
+  var list = playersList || S.players;
+  var conspirators = list.filter(function(p){return p.role==='conspirator' || p.role==='imperator';});
+  if(smallGame()){
+    return []; // 2-4 players: nobody is shown their allies at reveal — everyone must feel their way
+  }
+  if(player.role==='imperator'){
+    if(S.count<=6){
+      return conspirators.filter(function(p){return p.id!==player.id;});
+    }
+    return []; // large games: imperator does not know conspirators
+  }
+  return conspirators.filter(function(p){return p.id!==player.id;});
+}
+
+// What a player actually, legitimately knows about their own team right now —
+// not the ground-truth ally list. Standard-size Conspirators know their team
+// from the start; everyone else (Senators always, and everyone in a small
+// 2-4 player Senate) only learns a teammate by personally confirming them
+// "Loyal" with Investigate Loyalty.
+function knownAllies(player){
+  if(!smallGame() && player.team==='conspiracy') return player.allies.slice();
+  var known = [];
+  for(var pid in player.intel){
+    if(player.intel[pid]==='loyal') known.push(parseInt(pid,10));
+  }
+  return known;
+}
+
+/* ---------- Bot decision logic ----------
+   Bots play strategically but never deceptively: there is no bluffing, no
+   false claims, no faked votes — every bot's own moves (what it enacts,
+   how it votes, who it targets) always follow its real role's true
+   interest. The "strategy" is entirely in how each bot READS the other
+   players: it watches the same public information a sharp human would
+   (who served as Princeps/Consul, and whether a Res Publica or an Imperium
+   Decree came out of it) and keeps a running, probability-weighted
+   suspicion score on everyone at the table, the way real deduction-game
+   players do "policy math". See the constants below for the exact numbers.
+
+   TRUST/SUSPICION MODEL
+   ----------------------
+   - Every player keeps p.suspicion[targetId]: a 0-100 score, "how likely
+     does target look like Conspiracy", starting at 50 (neutral) for
+     everyone. It is PUBLIC reasoning — every bot updates it identically
+     off the same public event, exactly like a human counting cards would.
+   - Every player keeps p.observedTerms[targetId]: how many legislative
+     terms we've watched target serve as Princeps or Consul — our sample
+     size on them.
+   - Personal Investigate Loyalty results are PRIVATE and stored in the
+     existing p.intel map ('loyal'/'enemy', relative to the investigator's
+     own team) — those are near-certainty and override the public score
+     entirely for that one observer's decisions.
+   - After every legislative session (not counting Chaos, where nobody
+     chose anything), every living player's suspicion score for that
+     round's Princeps and Consul moves up (Imperium enacted) or down
+     (Res Publica enacted). The size of the move is scaled by how
+     "avoidable" the outcome plausibly was, using real card-counting: the
+     public Discarded/Remaining counters mean anyone can work out how many
+     Res Publica and Imperium Decrees are still unseen, so we compute the
+     probability that an honest draw could have been forced into that
+     outcome anyway. A bad decree when the deck was stacked with Imperium
+     Decrees is barely suspicious (probably just unlucky); the same bad
+     decree when the deck still had plenty of Res Publica left is very
+     suspicious (probably mischief). Consul moves further than Princeps,
+     since the Consul has the final say between two decrees. */
+var SUSPICION_START = 50;
+var BASE_IM_SUSPICION = 18;   // max suspicion Consul gains for an Imperium Decree
+var BASE_RP_TRUST     = 14;   // max suspicion Consul loses for a Res Publica Decree
+var PRINCEPS_WEIGHT   = 0.45; // Princeps' own delta is scaled down by this much vs Consul's
+var MIN_FORCED_FACTOR = 0.15; // even a fully "forced" outcome still carries a little signal
+var TEST_GRAY_LOW = 35, TEST_GRAY_HIGH = 65; // suspicion band considered "still worth testing"
+var TEST_MAX_SAMPLE = 1;      // fewer than this many observed terms counts as "under-tested"
+var TEST_PROBABILITY = 0.6;   // chance a bot acts on the urge to test someone, vs. its default pick
+var NAIVE_SENATE_AYE_PROBABILITY = 0.75; // unskilled Senate vote fallback: basic civic trust by default, not a 50/50 coin flip
+var SENATE_NAY_THRESHOLD = 70;        // Senate votes Nay once suspicion crosses this, normally
+var SENATE_NAY_THRESHOLD_CAUTION = 62; // ...but once caution mode kicks in (see inCaution), a lower bar is enough — now applies in EVERY game size, not just standard
+var SENATE_NAY_THRESHOLD_CAUTION_LARGE = 56; // 7-10p specifically: the Conspiracy's guaranteed-aye voting bloc is a larger fraction of the table there, so it takes even less suspicion to trigger a Nay once caution mode is active
+var CONSPIRACY_OBSTRUCTION_RP_PROGRESS = 0.6; // Conspiracy's late-game obstruction behavior only kicks in once the Senate has reached this fraction of its Res Publica win condition (0.6 = 3 of 5 Decrees)
+var CONSPIRACY_OBSTRUCTION_TRUST_THRESHOLD = 40; // ...and only against a Princeps/Consul pairing that looks this trustworthy or better (lower = safer-looking)
+var CONSPIRACY_OBSTRUCTION_PROBABILITY = 0.4; // a probability, not the default — most Conspirators still back every government even late, see conspiratorPlaysCover for the sleeper exception
+var VOTE_TRUST_SHIFT = 5;      // how much a single vote's trust signal moves an observer's suspicion of the voter — a smaller nudge than legislative evidence (BASE_IM_SUSPICION/BASE_RP_TRUST), since voting is a noisier tell
+var VOTE_TRUST_RISKY = 60;     // a nominee/princeps pairing the observer rates this suspicious or worse — voting Aye on it is a Conspiracy-like tell
+var VOTE_TRUST_SAFE = 40;      // a pairing the observer rates this trustworthy or better — voting Nay on it is a tell too (the new late-game obstruction behavior, or genuine paranoia)
+var RETRO_VINDICATION_SHIFT = 10; // when an observer confirms someone is an enemy via Investigate Loyalty, everyone who had EVER voted Nay on that person gets this much LESS suspicious in that observer's eyes — they were right to be wary, whether or not they could prove it at the time
+var PROSCRIBE_TRUST_MAX_SHIFT = 12; // proscribing a player who looked suspicious earns the Princeps this much LESS suspicion (at most) in every other observer's eyes — scaled by how suspicious the proscribed target actually looked to that observer, so removing a barely-suspected senator earns little, removing someone near-certainly an enemy earns close to the full amount
+var PROSCRIBE_TIE_BAND = 5;    // candidates within this many points of the top suspicion tie for the pick
+var CAUTION_IM_CARDS = 3;      // caution mode starts once this many Imperium Decrees are enacted...
+var CAUTION_TOTAL_CARDS = 5;   // ...or once this many total decrees are enacted, whichever comes first
+var PUBLIC_NOTICE_ROUNDS = 3;  // how many legislative rounds an "X investigated Y" notice stays visible to everyone
+var SLEEPER_PROBABILITY_CONSPIRATOR = 0.30; // rank-and-file Conspirators
+var SLEEPER_PROBABILITY_IMPERATOR   = 0.50; // the Imperator benefits far more from staying hidden
+var SLEEPER_COVER_THRESHOLD = 58;    // a sleeper keeps up the act while their own perceived suspicion stays under this
+var SLEEPER_BASE_COVER_CHANCE = 0.9;     // sleeper archetype: high baseline appetite for cover, still scaled by skill (see conspiratorPlaysCover)
+var NON_SLEEPER_BASE_COVER_CHANCE = 0.18; // non-sleeper: a much smaller baseline, but not zero — a sharp (high-skill) Conspirator can still recognize a cheap cover opportunity
+var SLEEPER_LATE_DEFECT_CHANCE = 0.15; // even mid-cover, a small per-turn chance to cash in early rather than wait it out
+var SLEEPER_EXPOSED_DEFECT_BONUS = 0.25; // extra per-turn defect chance added for EACH living player who holds confirmed intel on you
+var RUSH_IM_PROGRESS = 0.7;   // Conspiracy abandons the sleeper act once their own Imperium count is this fraction of the win threshold
+var EMERGENCY_RP = 4;         // Conspiracy abandons the sleeper act once the Senate has this many Res Publica Decrees (one shy of winning)
+var URGENT_IM_MARGIN = 1;     // Senate tightens its proscribe pick once the Conspiracy is within this many Imperium Decrees of winning (standard 5-10p games)
+var URGENT_IM_MARGIN_SMALL = 1; // same idea, tuned separately for 2-4p games (5-card threshold instead of 6, faster-moving track)
+var URGENT_PROSCRIBE_TIE_BAND = 1; // narrower tie band used under that urgency (replaces the normal PROSCRIBE_TIE_BAND)
+var FRIENDLY_FIRE_HEDGE_BAND = 10; // in small games with no confirmed allies, widens the "most trustworthy" proscribe pool by this much so a Conspirator isn't guaranteed to lock onto its own best-hidden teammate
+
+var CLAIM_SILENCE_PROBABILITY = 0.35;      // baseline chance a bot says nothing at a given decision point
+var CONSUL_BLUFF_FORCED_PROBABILITY = 0.55; // an uncovered Conspiracy Consul who took a REAL choice (mixed hand) and enacted Imperium: chance they falsely claim "I had no choice" to protect cover
+var CONSUL_MIXED_HAND_VETO_PROBABILITY = 0.25; // a cover-caring Conspiracy Consul holding a mixed (1RP+1IM) hand: chance they propose a veto INSTEAD of taking the free Imperium, purely to avoid the ground-truth tell that enacting it would trigger
+var INVESTIGATOR_HONEST_REVEAL_PROBABILITY = 0.6; // a Senate investigator: chance they publicly state the TRUE result rather than staying private
+var INVESTIGATOR_FRAME_PROBABILITY = 0.35;  // a Conspiracy investigator who found a real Senator (their enemy): chance they falsely publicly claim that Senator is "enemy" — framing an innocent target
+var INVESTIGATOR_PROTECT_ALLY_LIE_PROBABILITY = 0.15; // a Conspiracy investigator who found a fellow Conspirator/Imperator (an ally): small chance they falsely claim "enemy" about their OWN ally as an aggressive misdirection play
+var CLAIM_TRUST_NUDGE = 3;   // small, bounded suspicion nudge from a claim's TONE alone (reassuring lowers, evasive raises) — deliberately much smaller than real-evidence deltas like BASE_IM_SUSPICION(18)/BASE_RP_TRUST(14)
+var FALSE_VOUCH_PENALTY = 14; // retrospective suspicion penalty (in one observer's eyes) applied to anyone who had publicly vouched a now-confirmed-enemy as "loyal" (ir_loyal claim) — and the same amount of REWARD to anyone who had publicly called them "enemy" (ir_enemy claim) — see markConfirmedEnemy
+
+// The bots' (and the human's, via a matching dropdown) small talk: brief,
+// canned lines a player can offer to justify a move — honest or a bluff,
+// always optional (silence is never excluded). `tone` drives a small,
+// bounded universal trust nudge (applyClaimTone) independent of whether
+// the line is actually true — other players can only judge HOW something
+// was said, not verify it, except where ground truth catches an outright
+// lie (see markConfirmedEnemy and the mixed-hand Imperium tell).
+var DIALOGUE = {
+  discard: {
+    d_no_choice:    {text:'All three cards were the same — I had no real choice to make.', tone:'reassuring'},
+    d_mixed_hand:   {text:"I'm handing over a real mix — make of it what you will.", tone:'neutral'},
+    d_tough_call:   {text:'That was a difficult discard. I did what I thought was right.', tone:'neutral'},
+    d_trust_me:     {text:'Trust me, I discarded in good faith.', tone:'evasive'},
+    d_deflect:      {text:'Whatever happens next is on the Consul, not me.', tone:'evasive'}
+  },
+  enact: {
+    e_forced_im:      {text:'I received two Imperium cards, so I had no choice.', tone:'reassuring'},
+    e_forced_rp:      {text:'Both cards were Res Publica — an easy call.', tone:'reassuring'},
+    e_reluctant_im:   {text:"I didn't love enacting that, but it was the better of two bad options.", tone:'neutral'},
+    e_proud_rp:       {text:'Glad to strengthen the Republic with that one.', tone:'reassuring'},
+    e_blame_princeps: {text:'Whatever card I got, blame whoever handed it to me.', tone:'evasive'}
+  },
+  veto_propose: {
+    v_forced_bad:  {text:"Both decrees were dangerous — I'd rather we scrap them both.", tone:'reassuring'},
+    v_protect_all: {text:'Better a wasted term than a decree neither of us wants.', tone:'neutral'},
+    v_no_reason:   {text:'No comment on why — just trust me on this one.', tone:'evasive'}
+  },
+  veto_accept: {
+    va_agree:     {text:'Agreed — best we discard both and move on.', tone:'neutral'},
+    va_relief:    {text:"Relief, honestly — let's move on.", tone:'reassuring'},
+    va_reluctant: {text:"Not thrilled, but I'll allow it.", tone:'neutral'}
+  },
+  veto_refuse: {
+    vr_refuse:   {text:'No — you drew them, you decide.', tone:'neutral'},
+    vr_own_it:   {text:'You made your bed — enact it.', tone:'evasive'},
+    vr_no_games: {text:"I won't let us dodge this one.", tone:'reassuring'}
+  },
+  vote: {
+    ay_trust:      {text:'I trust {target} in this pairing. Aye.', tone:'reassuring'},
+    ay_risk:       {text:"Not without risk, but I'll back {target}. Aye.", tone:'neutral'},
+    ay_habit:      {text:'Aye on {target}, same as always.', tone:'evasive'},
+    na_suspicious: {text:'Something about {target} worries me. Nay.', tone:'reassuring'},
+    na_caution:    {text:'Too risky backing {target} at this point. Nay.', tone:'neutral'},
+    na_pattern:    {text:"{target}'s voting pattern doesn't sit right with me. Nay.", tone:'reassuring'}
+  },
+  nominate: {
+    n_safe: {text:"I believe in {target} — they've earned my trust.", tone:'reassuring'},
+    n_test: {text:'I want to see how {target} handles it.', tone:'neutral'},
+    n_gut:  {text:'Gut feeling on {target}, nothing more.', tone:'evasive'}
+  },
+  investigate_reveal: {
+    ir_loyal:        {text:"I can confirm — {target} is loyal to the Republic.", tone:'reassuring'},
+    ir_enemy:        {text:'I can confirm — {target} serves the conspiracy.', tone:'reassuring'},
+    ir_private:      {text:"I'd rather keep that to myself for now.", tone:'evasive'},
+    ir_inconclusive: {text:"The result wasn't as clear as I'd hoped.", tone:'evasive'}
+  },
+  proscribe: {
+    p_certain:   {text:'I am certain of this. {target} must be proscribed.', tone:'reassuring'},
+    p_gut:       {text:"It's a gut call on {target}, but I stand by it.", tone:'neutral'},
+    p_regret:    {text:'I take no pleasure in this, but Rome demands {target}\'s removal.', tone:'reassuring'},
+    p_strategic: {text:'Removing {target} is simply the safest move right now.', tone:'evasive'}
+  },
+  // Its own set, distinct from `proscribe` above — those all assert
+  // certainty and demand someone's removal, which makes no sense on a
+  // term where nobody gets proscribed. These instead let a player explain
+  // WHY they're holding off: naming a suspect without acting on them is a
+  // legitimate, honest thing to say.
+  proscribe_skip: {
+    ps_named_wait: {text:"I have my eye on {target}, but not enough to act on it yet.", tone:'neutral'},
+    ps_no_evidence:{text:"Nothing solid enough to move against anyone this term.", tone:'neutral'},
+    ps_risky:      {text:"Proscribing the wrong person now would cost us more than it's worth.", tone:'evasive'},
+    ps_watching:   {text:"I'd rather keep watching a while longer.", tone:'evasive'}
+  },
+  special_election: {
+    s_confident: {text:'I trust {target} to lead the Senate well.', tone:'reassuring'},
+    s_strategic: {text:"{target} is the strategic pick for what's coming.", tone:'neutral'},
+    s_gut:       {text:'Just a hunch on {target}.', tone:'evasive'}
+  }
+};
+function claimText(moment, id){ return DIALOGUE[moment] && DIALOGUE[moment][id]; }
+
+// Small, universal trust nudge from HOW something was said, not what —
+// applies to bot AND human speakers alike. Deliberately bounded well below
+// the real-evidence deltas elsewhere (BASE_IM_SUSPICION=18, BASE_RP_TRUST=14,
+// PROSCRIBE_TRUST_MAX_SHIFT=12) since this is flavor corroboration, not proof.
+function applyClaimTone(speaker, tone){
+  if(tone!=='reassuring' && tone!=='evasive') return;
+  var delta = tone==='reassuring' ? -CLAIM_TRUST_NUDGE : CLAIM_TRUST_NUDGE;
+  S.players.forEach(function(observer){
+    if(observer.id===speaker.id) return;
+    var cur = observer.suspicion[speaker.id]===undefined ? SUSPICION_START : observer.suspicion[speaker.id];
+    observer.suspicion[speaker.id] = clamp100(cur + delta);
+  });
+}
+
+// Speaks a claim (bot OR human — both are plain player objects) into the
+// public log, or does nothing at all if claimId is falsy (silence, always
+// a valid choice and never penalized on its own). `targetName`, when given,
+// fills in any {target} placeholder — so a nomination, vote, investigate
+// result, proscription or special election naming a specific person reads
+// as "Lucius: 'I can confirm, Marcus is loyal to the Republic.'" instead of
+// a vague "they/them". Claims that deliberately withhold information
+// (staying private, silence) never carry a {target} token, so choosing not
+// to share still works exactly as before.
+function botSpeak(speaker, moment, claimId, targetName){
+  if(!claimId){ S.lastSpeech = null; return null; }
+  var entry = DIALOGUE[moment] && DIALOGUE[moment][claimId];
+  if(!entry){ S.lastSpeech = null; return null; }
+  var text = entry.text.indexOf('{target}')!==-1 ? entry.text.split('{target}').join(targetName || 'them') : entry.text;
+  pushLog(speaker.name+': "'+text+'"');
+  S.lastSpeech = {playerId:speaker.id, name:speaker.name, text:text};
+  applyClaimTone(speaker, entry.tone);
+  return entry;
+}
+
+// The unified "observer now has certain, ground-truth-grade proof target is
+// an enemy" helper — used by the mixed-hand Imperium tell, a genuine
+// Investigate Loyalty result, and a caught investigate-claim lie alike.
+// Also applies the RETROSPECTIVE half of the dialogue system: anyone who
+// had publicly vouched this now-confirmed enemy as "loyal" (an ir_loyal
+// claim) looks correspondingly more suspicious in this observer's eyes —
+// they were wrong, whether honestly mistaken or lying for them — and
+// anyone who had publicly called them "enemy" (ir_enemy) looks more
+// trustworthy, mirroring applyVindication's Nay-vote logic but for claims.
+function markConfirmedEnemy(observer, target){
+  if(observer.intel[target.id]==='enemy') return;
+  observer.intel[target.id] = 'enemy';
+  if(target.exposedTo.indexOf(observer.id)===-1) target.exposedTo.push(observer.id);
+  applyVindication(observer, target);
+  var vouches = S.investigateVouches[target.id];
+  if(vouches){
+    vouches.forEach(function(v){
+      if(v.investigatorId===observer.id) return;
+      var cur = observer.suspicion[v.investigatorId]===undefined ? SUSPICION_START : observer.suspicion[v.investigatorId];
+      var delta = v.claimedLoyal ? FALSE_VOUCH_PENALTY : -FALSE_VOUCH_PENALTY;
+      observer.suspicion[v.investigatorId] = clamp100(cur + delta);
+    });
+  }
+}
+
+function botDiscardClaim(bot, three){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  var allSame = three[0]===three[1] && three[1]===three[2];
+  if(allSame) return 'd_no_choice';
+  return choose(['d_mixed_hand','d_tough_call','d_trust_me','d_deflect']);
+}
+
+// two = the 2 cards actually handed to the Consul; enactedCard = what they
+// chose; handWasMixed = two[0]!==two[1]. THIS is the flagship bluff: an
+// uncovered Conspirator/Imperator who had a real mixed hand and chose to
+// enact Imperium anyway (the only way handWasMixed && enactedCard==='IM'
+// can happen — see botEnactChoice) will often falsely claim "no choice"
+// (e_forced_im) to protect their cover, exactly as if genuinely forced.
+// The claim doesn't change what the Princeps privately knows (they already
+// have certain ground truth from the act itself, see updatePublicSuspicion)
+// — it only shapes what OTHER observers, who lack that ground truth, hear.
+function botEnactClaim(bot, two, enactedCard, handWasMixed){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  if(enactedCard==='IM'){
+    if(!handWasMixed) return 'e_forced_im';
+    // Tutorial: never falsely claim "no choice" when there really was one —
+    // bots stay plainly aligned with their side instead of bluffing.
+    if(S.tutorialMode) return choose(['e_reluctant_im', null]);
+    if(Math.random() < CONSUL_BLUFF_FORCED_PROBABILITY) return 'e_forced_im';
+    return choose(['e_reluctant_im', null]);
+  }
+  if(!handWasMixed) return 'e_forced_rp';
+  return choose(['e_proud_rp','e_blame_princeps']);
+}
+
+// Used both when a veto is genuinely forced (forcedEnactmentHurtsTeam was
+// true) and when a Conspiracy Consul is proposing purely to protect cover
+// on a mixed hand — note the cover-play branch deliberately never picks
+// 'v_forced_bad' (the "I had no choice" claim), since a savvy Conspirator
+// avoids a checkable lie there and sticks to vaguer, unfalsifiable framing.
+function botVetoProposeClaim(bot, trulyForced){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  if(trulyForced) return choose(['v_forced_bad','v_protect_all']);
+  return choose(['v_protect_all','v_no_reason', null]);
+}
+function botVetoAcceptClaim(bot){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return choose(['va_agree','va_relief','va_reluctant']);
+}
+function botVetoRefuseClaim(bot){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return choose(['vr_refuse','vr_own_it','vr_no_games']);
+}
+function botVoteClaim(bot, isAye){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return isAye ? choose(['ay_trust','ay_risk','ay_habit']) : choose(['na_suspicious','na_caution','na_pattern']);
+}
+function botNominateClaim(bot){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return choose(['n_safe','n_test','n_gut']);
+}
+// foundEnemy = true when the investigated target is really on the
+// opposing team from `bot`. Returns {claimId, claimedLoyal} — claimedLoyal
+// is a plain boolean (true='loyal' claimed, false='enemy' claimed) or null
+// when staying private/silent, and feeds S.investigateVouches so a later
+// confirmation can catch — and retroactively punish or reward — the claim.
+function botInvestigateRevealClaim(bot, foundEnemy){
+  if(bot.team==='senate'){
+    if(Math.random() < INVESTIGATOR_HONEST_REVEAL_PROBABILITY){
+      var id = foundEnemy ? 'ir_enemy' : 'ir_loyal';
+      return {claimId:id, claimedLoyal: !foundEnemy};
+    }
+    return {claimId: choose(['ir_private','ir_inconclusive', null]), claimedLoyal:null};
+  }
+  if(foundEnemy){
+    if(Math.random() < INVESTIGATOR_FRAME_PROBABILITY) return {claimId:'ir_enemy', claimedLoyal:false};
+    return {claimId: choose(['ir_private','ir_inconclusive', null]), claimedLoyal:null};
+  }
+  if(Math.random() < INVESTIGATOR_PROTECT_ALLY_LIE_PROBABILITY) return {claimId:'ir_enemy', claimedLoyal:false};
+  return {claimId: choose(['ir_private','ir_inconclusive', null]), claimedLoyal:null};
+}
+function botProscribeClaim(bot){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return choose(['p_certain','p_gut','p_regret','p_strategic']);
+}
+function botSpecialElectionClaim(bot){
+  if(Math.random() < CLAIM_SILENCE_PROBABILITY) return null;
+  return choose(['s_confident','s_strategic','s_gut']);
+}
+// A Conspiracy Consul (or Imperator) who still has something to protect —
+// mirrors conspiratorPlaysCover's late-game gates but applies to ANY
+// Conspiracy Consul in the moment, not just long-term sleepers, since this
+// is a one-off tactical call, not a persistent role trait.
+function consulValuesCover(bot){
+  if(inCaution()) return false;
+  if(imProgress() >= RUSH_IM_PROGRESS) return false;
+  if(S.rp >= EMERGENCY_RP) return false;
+  if(aliveExposers(bot).length > 0) return false;
+  // Small strategic refinement: this used to ignore how suspicious the
+  // Consul currently looks entirely, unlike the plain-card cover mechanic
+  // (conspiratorPlaysCover), which already gives up once suspicion is past
+  // SLEEPER_COVER_THRESHOLD — past that point the act isn't working, and a
+  // veto request is itself a visible, slightly odd move that's better spent
+  // (or not spent at all) than wasted propping up a cover that's already
+  // blown. Bringing the veto-cover decision in line with that same
+  // threshold keeps the two "stay in character" mechanisms consistent.
+  if(averagePublicSuspicion(bot) >= SLEEPER_COVER_THRESHOLD) return false;
+  return true;
+}
+
+function choose(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function nChooseK(n,k){
+  if(k<0||k>n) return 0;
+  k = Math.min(k, n-k);
+  var r = 1;
+  for(var i=0;i<k;i++){ r = r*(n-i)/(i+1); }
+  return r;
+}
+// Probability that k cards drawn at random from a pool of `total` unseen
+// cards (of which `ofType` are the type in question) are ALL that type.
+function probAllKOfType(ofType, total, k){
+  if(total<k) return 0;
+  return nChooseK(ofType,k) / nChooseK(total,k);
+}
+// Bots (both sides) stop testing ambiguous players and default to their
+// safe pick once the game reaches "caution mode" — 3 Imperium Decrees
+// enacted (the same point standard games start risking an instant loss if
+// the Imperator gets elected Consul) or 5 total decrees enacted, whichever
+// comes first. Near that point a wrong guess, or a wasted turn gathering
+// information that won't get used in time, can lose the game outright.
+function inCaution(){ return S.im>=CAUTION_IM_CARDS || (S.rp+S.im)>=CAUTION_TOTAL_CARDS; }
+
+// How trustworthy a player currently LOOKS to the rest of the table — the
+// average of everyone else's raw suspicion score for them. Deliberately
+// uses the raw public score, not getEffectiveSuspicion: a player has no
+// legitimate way to know that someone privately confirmed them via
+// Investigate Loyalty, only how their public track record reads.
+function averagePublicSuspicion(bot){
+  var others = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+  if(!others.length) return SUSPICION_START;
+  var sum = others.reduce(function(a,observer){
+    var v = observer.suspicion[bot.id];
+    return a + (v===undefined ? SUSPICION_START : v);
+  }, 0);
+  return sum / others.length;
+}
+
+function aliveExposers(bot){
+  // living players who hold confirmed intel that `bot` is an enemy
+  return bot.exposedTo
+    .map(function(id){ return byId(id); })
+    .filter(function(p){ return p && p.alive; });
+}
+function imProgress(){ return S.im / imWinThreshold(); }
+function rpProgress(){ return S.rp / 5; }
+
+// Whether a Conspirator/Imperator plays a card OUT OF CHARACTER (the
+// Senate-favored one) this specific turn to bank trust — never gated by a
+// one-time "sleeper" roll alone. The cost checks below (caution mode,
+// rushing the win, the Senate one Decree away, active exposure, suspicion
+// already too high) decide when cover is even worth attempting — cheap
+// now, not worth it later — and among the turns where it IS cheap, the
+// chance a Conspirator actually recognizes and takes that opening scales
+// directly with skill (see botSkillProb/DIFFICULTY_TABLE): a sharp
+// Conspirator on Hard/Impossible plays out-of-character often when it
+// costs little; a careless one on Easy rarely bothers, whether or not
+// they happened to roll as a "sleeper" archetype at deal time (sleepers
+// just start with a higher baseline appetite for it).
+function conspiratorPlaysCover(bot){
+  if(S.tutorialMode) return false; // tutorial: bots never play out-of-character, see beginReveal
+  if(inCaution()) return false;
+  if(imProgress() >= RUSH_IM_PROGRESS) return false;   // rushing the win beats staying hidden
+  if(S.rp >= EMERGENCY_RP) return false;               // Senate one Decree from winning — cover no longer matters
+  var exposedCount = aliveExposers(bot).length;
+  if(exposedCount>0 && Math.random() < (SLEEPER_LATE_DEFECT_CHANCE + SLEEPER_EXPOSED_DEFECT_BONUS*exposedCount)) return false;
+  if(averagePublicSuspicion(bot) >= SLEEPER_COVER_THRESHOLD) return false;
+  if(Math.random() < SLEEPER_LATE_DEFECT_CHANCE) return false;
+  var baseChance = bot.sleeper ? SLEEPER_BASE_COVER_CHANCE : NON_SLEEPER_BASE_COVER_CHANCE;
+  return Math.random() < baseChance * botSkillProb(bot);
+}
+
+function getEffectiveSuspicion(observer, targetId){
+  var intel = observer.intel[targetId];
+  if(intel==='enemy') return 96;
+  if(intel==='loyal') return 4;
+  if(observer.suspicion[targetId]===undefined) return SUSPICION_START;
+  return observer.suspicion[targetId];
+}
+
+// Whoever `bot` currently suspects most, among the living (excluding
+// themselves) — used only for flavor text (naming a suspect while
+// declining to proscribe them), never to drive an actual decision.
+function topSuspectFor(bot){
+  var candidates = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+  if(!candidates.length) return null;
+  var scored = candidates.map(function(p){ return {p:p, s:getEffectiveSuspicion(bot,p.id)}; })
+    .sort(function(a,b){ return b.s-a.s; });
+  return scored[0].p;
+}
+
+function clamp100(v){ return Math.max(0, Math.min(100, v)); }
+
+// Called once per real (non-Chaos) legislative session. rpBefore/imBefore
+// are the enacted counts BEFORE this round's card, i.e. exactly what the
+// public Discarded/Remaining counters implied a moment before this draw.
+//
+// This models the actual two-stage handoff, not just the final card:
+//   - Princeps drew 3 cards and discarded 1 — their forcedness is "what's
+//     the chance all 3 of MY draws were this type, so I never had a choice
+//     to make at all."
+//   - Consul only ever SAW the 2 cards Princeps handed them — their
+//     forcedness is "what's the chance the 2 cards I actually received
+//     were both this type," which is a materially different (generally
+//     higher) probability than the Princeps' 3-card figure. A Consul who
+//     enacts Imperium off a genuinely mixed hand is far more telling than
+//     a Princeps who merely drew a bad set of 3.
+function updatePublicSuspicion(princepsId, consulId, enacted, rpBefore, imBefore, handWasMixed){
+  var rpUnseen = 7 - rpBefore, imUnseen = 14 - imBefore;
+  var totalUnseen = rpUnseen + imUnseen;
+  var consulDelta, princepsDelta, worsens;
+  if(enacted==='IM'){
+    var pConsulForced = probAllKOfType(imUnseen, totalUnseen, 2); // both handed cards were IM
+    var pPrincepsForced = probAllKOfType(imUnseen, totalUnseen, 3); // all 3 drawn were IM
+    consulDelta = BASE_IM_SUSPICION * Math.max(MIN_FORCED_FACTOR, 1 - pConsulForced);
+    princepsDelta = BASE_IM_SUSPICION * PRINCEPS_WEIGHT * Math.max(MIN_FORCED_FACTOR, 1 - pPrincepsForced);
+    worsens = true;
+  } else {
+    var pConsulForcedRP = probAllKOfType(rpUnseen, totalUnseen, 2);
+    var pPrincepsForcedRP = probAllKOfType(rpUnseen, totalUnseen, 3);
+    consulDelta = BASE_RP_TRUST * Math.max(MIN_FORCED_FACTOR, 1 - pConsulForcedRP);
+    princepsDelta = BASE_RP_TRUST * PRINCEPS_WEIGHT * Math.max(MIN_FORCED_FACTOR, 1 - pPrincepsForcedRP);
+    worsens = false;
+  }
+  var sign = worsens ? 1 : -1;
+  S.players.forEach(function(observer){
+    if(observer.id!==consulId){
+      var cur = observer.suspicion[consulId]===undefined ? SUSPICION_START : observer.suspicion[consulId];
+      observer.suspicion[consulId] = clamp100(cur + sign*consulDelta);
+    }
+    if(observer.id!==princepsId){
+      var cur2 = observer.suspicion[princepsId]===undefined ? SUSPICION_START : observer.suspicion[princepsId];
+      observer.suspicion[princepsId] = clamp100(cur2 + sign*princepsDelta);
+    }
+    observer.observedTerms[princepsId] = (observer.observedTerms[princepsId]||0) + 1;
+    observer.observedTerms[consulId] = (observer.observedTerms[consulId]||0) + 1;
+  });
+  // The Princeps personally handed the Consul these exact two cards — so if
+  // that hand genuinely held one of each type, and the Consul still chose
+  // to enact Imperium, that's not a probability to the Princeps, it's
+  // ground truth. No Senate-aligned player ever passes up an available Res
+  // Publica Decree (see botEnactChoice/botVoteChoice's mirror logic), so a
+  // free choice for Imperium proves the Consul serves the conspiracy — the
+  // Princeps now knows this exactly as if they'd personally Investigated
+  // them, which is exactly how it's recorded here. Restricted to standard
+  // games (5-10p, !smallGame()) — same precedent as conspiratorTeammates():
+  // in 2-4p nobody is handed extra certainty for free, everyone still has
+  // to feel their way, and a full-certainty reveal in a 2-player game (with
+  // only one possible other role) is disproportionately decisive.
+  if(enacted==='IM' && handWasMixed && !smallGame()){
+    var princeps = byId(princepsId);
+    var consul = byId(consulId);
+    if(princeps && consul) markConfirmedEnemy(princeps, consul);
+  }
+}
+
+// Candidates a bot considers "still worth testing" by giving them power —
+// ambiguous suspicion AND a small sample size, so the next legislative
+// outcome actually teaches us something. Confirmed players are excluded —
+// there is nothing left to learn about them. Once the game reaches caution
+// mode (see inCaution), nobody gets tested any more, on EITHER side — a bad
+// guess this late can hand over the win outright, so bots fall straight
+// through to their safe default instead.
+function testCandidates(bot, pool){
+  if(inCaution()) return [];
+  return pool.filter(function(p){
+    if(bot.intel[p.id]==='loyal' || bot.intel[p.id]==='enemy') return false;
+    var s = getEffectiveSuspicion(bot, p.id);
+    var seen = bot.observedTerms[p.id] || 0;
+    return s>=TEST_GRAY_LOW && s<=TEST_GRAY_HIGH && seen<=TEST_MAX_SAMPLE;
+  });
+}
+
+function botChooseNominee(bot){
+  var elig = eligibleConsuls();
+  if(!elig.length) return null;
+  if(!smartRoll(bot)){
+    // Unskilled still isn't RANDOM against their own side — a Conspirator
+    // who fails the skill roll just skips the suspicion-reading and testing
+    // logic below, but still backs a known ally when they have one. Senate
+    // has no equivalent team signal for "who to nominate", so it really is
+    // an even pick among the eligible for them.
+    if(bot.team==='conspiracy'){
+      var naiveAllies = knownAllies(bot);
+      var naiveAllyChoices = elig.filter(function(p){ return naiveAllies.indexOf(p.id)!==-1; });
+      if(naiveAllyChoices.length) return choose(naiveAllyChoices).id;
+    }
+    return choose(elig).id;
+  }
+  if(bot.team==='conspiracy'){
+    var allies = knownAllies(bot);
+    var allyChoices = elig.filter(function(p){ return allies.indexOf(p.id)!==-1; });
+    if(allyChoices.length) return choose(allyChoices).id;
+  }
+  // Test an ambiguous, under-observed player to learn more about them —
+  // most of the time, not always, so play doesn't become fully predictable.
+  var testPool = testCandidates(bot, elig);
+  if(testPool.length && Math.random()<TEST_PROBABILITY) return choose(testPool).id;
+  if(bot.team==='senate'){
+    // Prefer whoever currently looks safest; among the least-suspicious,
+    // pick at random so it isn't always the single lowest score.
+    var minS = Math.min.apply(null, elig.map(function(p){ return getEffectiveSuspicion(bot,p.id); }));
+    var safest = elig.filter(function(p){ return getEffectiveSuspicion(bot,p.id) <= minS+8; });
+    return choose(safest).id;
+  }
+  return choose(elig).id;
+}
+function botVoteChoice(bot, nomineeId){
+  if(!smartRoll(bot)){
+    // A Conspirator backing almost every government isn't a strategic read —
+    // it's the team's baseline instinct, free of any suspicion math. Losing
+    // the skill roll shouldn't erase that: a flat coin-flip would make a
+    // careless Conspirator vote Nay on a total stranger just as often as a
+    // sharp one votes Nay on someone they've actually got reason to doubt —
+    // which reads exactly like a meaningful "I secretly know this person
+    // isn't my ally" tell, especially early on before there's any real
+    // public information to blend into. Keep the team-appropriate default,
+    // just without the strategic reasoning behind it.
+    // Same idea for the Senate: without any suspicion-reading, a real voter
+    // still defaults to basic civic trust rather than a coin flip — Nay
+    // without a reason to distrust anyone reads as arbitrary obstruction,
+    // which is exactly the "plays against their own side" look this whole
+    // change is meant to avoid.
+    if(bot.team==='conspiracy') return Math.random()<0.90;
+    return Math.random()<NAIVE_SENATE_AYE_PROBABILITY;
+  }
+  var nomineeSuspicion = getEffectiveSuspicion(bot, nomineeId);
+  var princepsSuspicion = getEffectiveSuspicion(bot, currentPrinceps().id);
+  var threat = (nomineeSuspicion + princepsSuspicion) / 2;
+  if(bot.team==='conspiracy'){
+    // Sleepers protect their cover first — an unexplained Nay against an
+    // obviously trustworthy pairing is itself a tell (see the vote-trust
+    // signal below), which defeats the whole point of playing it safe.
+    if(conspiratorPlaysCover(bot)) return true;
+    // Most Conspirators still back every government unconditionally,
+    // whatever the pairing looks like — voting Nay normally only slows down
+    // their OWN path to the Imperium threshold. But late in a close game,
+    // rubber-stamping an obviously safe-looking Princeps/Consul pair just
+    // hands the Senate another shot at Res Publica. So once the Senate is
+    // within reach of its win (CONSPIRACY_OBSTRUCTION_RP_PROGRESS) and this
+    // particular pairing looks safe enough to be worth blocking, a probable
+    // minority starts obstructing instead — never the default, always a
+    // probability, exactly the exception rather than the rule.
+    if(!S.tutorialMode && rpProgress() >= CONSPIRACY_OBSTRUCTION_RP_PROGRESS && threat <= CONSPIRACY_OBSTRUCTION_TRUST_THRESHOLD){
+      if(Math.random() < CONSPIRACY_OBSTRUCTION_PROBABILITY) return false;
+    }
+    return true;
+  }
+  // Once caution mode is active (see inCaution), electing the Imperator as
+  // Consul is an instant loss for the Senate in EVERY game size — and a
+  // suspicious Princeps handing cards to a suspicious Consul is exactly the
+  // combination that makes that possible. So the Senate judges the pairing
+  // together, not just the nominee alone, and tightens its nerve (a lower
+  // bar for voting Nay) once that danger window opens. The bar drops further
+  // still in 7-10p games, where the Conspiracy's guaranteed-aye voting bloc
+  // is a larger share of the table and takes fewer wavering Senate votes to
+  // slip a risky pairing through.
+  var threshold = SENATE_NAY_THRESHOLD;
+  if(inCaution()) threshold = (S.count>=7) ? SENATE_NAY_THRESHOLD_CAUTION_LARGE : SENATE_NAY_THRESHOLD_CAUTION;
+  if(threat >= threshold) return false;
+  return true;
+}
+
+// A vote is public, and how someone votes relative to how risky the pairing
+// actually looks is itself a (noisy) tell — a Conspirator backs almost every
+// government unconditionally, so an observer who watches someone wave
+// through an obviously risky-looking pairing gains a little legitimate
+// evidence they might be exactly that; blocking an obviously safe-looking
+// one is the mirror tell (see the new late-game obstruction behavior above).
+// Each observer judges this from their OWN private suspicion of the nominee
+// and Princeps — nothing here reads anyone's hidden role or intel directly.
+function updateVoteTrust(nomineeId, princepsId){
+  alivePlayers().forEach(function(observer){
+    alivePlayers().forEach(function(voter){
+      if(voter.id===observer.id) return;
+      var voted = S.votes[voter.id];
+      if(voted===undefined) return;
+      var threat = (getEffectiveSuspicion(observer, nomineeId) + getEffectiveSuspicion(observer, princepsId)) / 2;
+      var cur = observer.suspicion[voter.id]===undefined ? SUSPICION_START : observer.suspicion[voter.id];
+      if(voted && threat >= VOTE_TRUST_RISKY){
+        observer.suspicion[voter.id] = clamp100(cur + VOTE_TRUST_SHIFT);
+      } else if(!voted && threat <= VOTE_TRUST_SAFE){
+        observer.suspicion[voter.id] = clamp100(cur + VOTE_TRUST_SHIFT);
+      }
+    });
+  });
+}
+
+// Votes are cast in full view of the table, so WHO voted Nay on a given
+// nominee is public record — recorded here, objectively, regardless of
+// anyone's private opinion at the time.
+function recordNayVotes(nomineeId){
+  var nominee = byId(nomineeId);
+  alivePlayers().forEach(function(voter){
+    if(S.votes[voter.id]===false && nominee.nayVotesReceived.indexOf(voter.id)===-1){
+      nominee.nayVotesReceived.push(voter.id);
+    }
+  });
+}
+
+// Retroactive vindication: the moment `observer` privately confirms `target`
+// is really an enemy (via an honest Investigate Loyalty), anyone who had
+// EVER voted Nay on that target in the past looks a little more trustworthy
+// to `observer` now — they were right to be wary, even though nobody could
+// prove it at the time. This only updates `observer`'s own private suspicion
+// — nobody else learns anything from it, since nobody else knows the result.
+function applyVindication(observer, target){
+  if(!target.nayVotesReceived || !target.nayVotesReceived.length) return;
+  target.nayVotesReceived.forEach(function(voterId){
+    if(voterId===observer.id) return;
+    var cur = observer.suspicion[voterId]===undefined ? SUSPICION_START : observer.suspicion[voterId];
+    observer.suspicion[voterId] = clamp100(cur - RETRO_VINDICATION_SHIFT);
+  });
+}
+
+// Proscribing someone who looked suspicious is a public, decisive act —
+// every other observer updates their trust in the Princeps who made the
+// call, scaled by how suspicious THAT OBSERVER (privately) rated the
+// target. Proscribing someone nobody suspected earns little; proscribing
+// someone near-universally distrusted earns close to the full reward.
+// This runs BEFORE the target is marked dead, but getEffectiveSuspicion
+// doesn't care about alive/dead so the ordering doesn't matter.
+function applyProscribeTrust(princeps, target){
+  alivePlayers().forEach(function(observer){
+    if(observer.id===princeps.id || observer.id===target.id) return;
+    var targetSusp = getEffectiveSuspicion(observer, target.id);
+    if(targetSusp <= SUSPICION_START) return; // only rewarded for removing someone who looked bad
+    var shift = PROSCRIBE_TRUST_MAX_SHIFT * ((targetSusp - SUSPICION_START) / (100 - SUSPICION_START));
+    var cur = observer.suspicion[princeps.id]===undefined ? SUSPICION_START : observer.suspicion[princeps.id];
+    observer.suspicion[princeps.id] = clamp100(cur - shift);
+  });
+}
+
+// Name-derived (never role-derived) per-player color, so the human player
+// gets a memorable visual anchor per senator without any side-channel leak
+// of hidden roles. Palette is intentionally disjoint from the role-tinted
+// --gold/--tyrian/--republic/--imperium tokens used elsewhere in the UI.
+var AVATAR_PALETTE = ['#14b8a6','#0d9488','#2dd4bf','#06b6d4','#0ea5e9','#0284c7','#3b82f6','#2563eb','#6366f1','#4f46e5','#8b5cf6','#7c3aed','#a855f7','#9333ea','#c026d3','#d946ef'];
+function playerColor(name){
+  var str = name || '';
+  var hash = 0;
+  for(var i=0;i<str.length;i++){
+    hash = ((hash<<5)-hash+str.charCodeAt(i))|0;
+  }
+  return AVATAR_PALETTE[Math.abs(hash) % AVATAR_PALETTE.length];
+}
+function initialsOf(name){
+  var initials = (name||'').split(/\s+/).filter(function(w){ return w.length>0; }).slice(0,2).map(function(w){ return w.charAt(0).toUpperCase(); }).join('');
+  return initials || '?';
+}
+function avatarHtml(player, size){
+  var name = (player && player.name) || '';
+  var sz = size || 28;
+  var initials = initialsOf(name);
+  var bg = name ? playerColor(name) : '#64748b';
+  return '<span class="avatar" style="width:'+sz+'px;height:'+sz+'px;min-width:'+sz+'px;background:'+bg+';font-size:'+Math.max(10, Math.round(sz*0.4))+'px">'+initials+'</span>';
+}
+
+// Compact Aye/Nay control mirrored in the top corner of the status bar,
+// next to the card-counter track, so the human doesn't have to scroll down
+// to the full vote list to see or change their own vote. Both controls
+// write to the exact same S.votes state via castVote(), so they always
+// agree with each other.
+function topVoteHtml(){
+  var hp = humanPlayer();
+  if(S.phase !== 'vote' || !hp || !hp.alive) return '';
+  var nominee = S.nomineeId!=null ? byId(S.nomineeId) : null;
+  var val = S.votes[hp.id];
+  var ayeClass = val === true ? ' chosen-aye' : '';
+  var nayClass = val === false ? ' chosen-nay' : '';
+  return '<div class="topvote">' +
+    '<span class="topvote-label">Vote'+(nominee?': '+nominee.name:'')+'</span>' +
+    '<button class="topvote-btn'+ayeClass+'" data-top-vote-val="1">Aye</button>' +
+    '<button class="topvote-btn'+nayClass+'" data-top-vote-val="0">Nay</button>' +
+  '</div>';
+}
+
+// Which card to keep/discard is basic team loyalty, not "strategy" — so
+// unlike nominate/vote/investigate targeting, this is NOT gated by
+// smartRoll at all: every bot, skilled or not, plays the card that helps
+// its own side. Skill only decides whether a Conspirator plays COVER
+// (deliberately picking the Senate-favored card to look innocent) — a
+// genuinely strategic move — via conspiratorPlaysCover. Without this, an
+// honest Senator could randomly discard Res Publica and keep two Imperium
+// cards on a failed skill roll, which looks exactly like betrayal to a
+// player watching, even though nothing about the situation actually calls
+// for randomness here.
+function botDiscardChoice(bot, three){
+  if(bot.team==='senate') { var i=three.indexOf('IM'); return i!==-1?i:0; }
+  // Skill is already baked into conspiratorPlaysCover's own probability
+  // (see botSkillProb inside it) — no separate smartRoll gate needed here.
+  if(conspiratorPlaysCover(bot)){ var i2=three.indexOf('IM'); return i2!==-1?i2:0; }
+  var j=three.indexOf('RP'); return j!==-1?j:0;
+}
+function botEnactChoice(bot, two){
+  if(bot.team==='senate') { var i=two.indexOf('RP'); return i!==-1?i:0; }
+  if(conspiratorPlaysCover(bot)){ var i2=two.indexOf('RP'); return i2!==-1?i2:0; }
+  var j=two.indexOf('IM'); return j!==-1?j:0;
+}
+// True when, if the veto on this exact two-card hand were refused, the
+// enactment botEnactChoice would then force on the Consul goes against
+// `bot`'s ownteam. This is the one question both sides of a veto
+// decision are really asking — "does refusing this hand force through a
+// decree I don't want?" — so it's shared by whoever is the Consul
+// deciding whether to PROPOSE a veto and whoever is the Princeps deciding
+// whether to ACCEPT one: a Senate player (or a covering Conspirator, who
+// by this point in caution/EMERGENCY_RP territory is no longer covering
+// anyway — see conspiratorPlaysCover) is only ever forced into something
+// unwanted by an IM+IM hand; an uncovered Conspirator or the Imperator is
+// only ever forced into something unwanted by an RP+RP hand — and that
+// case is exactly "refusing to place the last Res Publica Decree" when
+// S.rp is already at 4: enacting it ends the game for the Senate on the
+// spot, so the veto is Conspiracy's only way out of a hand that would
+// otherwise hand the Senate the win.
+function forcedEnactmentHurtsTeam(bot, two){
+  var hasRP = two.indexOf('RP')!==-1, hasIM = two.indexOf('IM')!==-1;
+  if(bot.team==='senate') return !hasRP;  // forced into IM+IM
+  return !hasIM;                          // Conspiracy/Imperator forced into RP+RP
+}
+function botVetoChoice(bot, two, proposerId){
+  // Whether refusing this veto forces through a decree that hurts your own
+  // team is, again, just reading your own hand — not strategy — so it's
+  // never gated by skill. Skill only gates the one genuinely strategic
+  // read: extending extra trust to a KNOWN ally's veto request even when
+  // it wasn't strictly forced (see below).
+  var proposer = proposerId!=null ? byId(proposerId) : null;
+  if(!smartRoll(bot)) return forcedEnactmentHurtsTeam(bot, two);
+  // A known ally proposing a veto on a hand that wasn't actually forced is
+  // a cover play (see consulValuesCover/CONSUL_MIXED_HAND_VETO_PROBABILITY
+  // in princepsDiscard) — accept it to protect their identity, even though
+  // refusing would otherwise hand the Conspiracy a free Imperium Decree.
+  // Only fires when `bot` genuinely KNOWS the proposer is on their side —
+  // an unconfirmed ally's odd veto request just looks like an odd veto
+  // request, evaluated normally below.
+  if(proposer && bot.team!=='senate' && proposer.team!=='senate' &&
+     knownAllies(bot).indexOf(proposer.id)!==-1 && !forcedEnactmentHurtsTeam(proposer, two)){
+    return true;
+  }
+  return forcedEnactmentHurtsTeam(bot, two);
+}
+function botInvestigateChoice(bot){
+  if(!smartRoll(bot)){
+    var poolN = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+    return choose(poolN).id;
+  }
+  var allies = knownAllies(bot);
+  var base = alivePlayers().filter(function(p){ return p.id!==bot.id && allies.indexOf(p.id)===-1 && !(p.id in bot.intel); });
+  if(!base.length) base = alivePlayers().filter(function(p){ return p.id!==bot.id && allies.indexOf(p.id)===-1; });
+  if(!base.length) base = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+  // Spend the investigation where it teaches the most: the player closest
+  // to 50/50 suspicion, not one we're already fairly sure about.
+  var best = base.slice().sort(function(a,b){
+    return Math.abs(getEffectiveSuspicion(bot,a.id)-50) - Math.abs(getEffectiveSuspicion(bot,b.id)-50);
+  });
+  var closest = Math.abs(getEffectiveSuspicion(bot,best[0].id)-50);
+  var tied = best.filter(function(p){ return Math.abs(getEffectiveSuspicion(bot,p.id)-50) <= closest+5; });
+  return choose(tied).id;
+}
+function botSpecialChoice(bot){
+  var pool = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+  if(!smartRoll(bot)) return choose(pool).id;
+  var allies = knownAllies(bot);
+  var known = pool.filter(function(p){ return allies.indexOf(p.id)!==-1; });
+  if(known.length) return choose(known).id;
+  var testPool = testCandidates(bot, pool);
+  if(testPool.length && Math.random()<TEST_PROBABILITY) return choose(testPool).id;
+  return choose(pool).id;
+}
+function botProscribeChoice(bot){
+  // Bots only avoid proscribing a teammate they've actually confirmed —
+  // in a small Senate that means they too can misfire and betray their own side.
+  var allies = knownAllies(bot);
+  var pool = alivePlayers().filter(function(p){ return p.id!==bot.id && allies.indexOf(p.id)===-1; });
+  if(!pool.length) pool = alivePlayers().filter(function(p){ return p.id!==bot.id; });
+  if(!smartRoll(bot)) return choose(pool).id;
+
+  // Silence a living witness first: someone who personally confirmed your
+  // identity via an honest Investigate Loyalty is a far bigger threat than
+  // an unconfirmed suspect, whatever the suspicion math says.
+  var witnesses = pool.filter(function(p){ return bot.exposedTo.indexOf(p.id)!==-1; });
+  if(witnesses.length) return choose(witnesses).id;
+
+  var enemies = pool.filter(function(p){ return bot.intel[p.id]==='enemy'; });
+  if(enemies.length) return choose(enemies).id;
+
+  if(bot.team==='conspiracy'){
+    // Suspicion reads as "how Conspiracy-like does this player look" — so a
+    // Conspirator's best unconfirmed target is the OPPOSITE end: whoever
+    // looks most trustworthy/Senator-like is most likely a real, reliable
+    // Senate figure. This doubles as the "strategic sabotage" pick once the
+    // Senate is dangerously close to winning (S.rp>=EMERGENCY_RP): removing
+    // a trusted, frequently-elected voice rather than hunting for a hidden
+    // enemy that may not even be findable in time.
+    var minS = Math.min.apply(null, pool.map(function(p){ return getEffectiveSuspicion(bot,p.id); }));
+    // Friendly-fire hedge: in a small game nobody is shown their allies at
+    // reveal, so an unconfirmed real teammate playing well looks EXACTLY as
+    // trustworthy as a genuine Senator — there's no legitimate way to tell
+    // them apart from suspicion alone. Locking onto the single most-trusted
+    // face would then be just as likely to execute your own side as an
+    // opponent. With no confirmed ally to rule anyone out yet, widen the
+    // pool the pick is drawn from so the risk is spread rather than certain.
+    var band = (smallGame() && knownAllies(bot).length===0) ? PROSCRIBE_TIE_BAND+FRIENDLY_FIRE_HEDGE_BAND : PROSCRIBE_TIE_BAND;
+    var trusted = pool.filter(function(p){ return getEffectiveSuspicion(bot,p.id) <= minS+band; });
+    return choose(narrowByNayVotes(trusted, true)).id;
+  }
+
+  // Senate: no confirmed enemy on hand — proscribe whoever looks most
+  // suspicious. Once the Conspiracy is dangerously close to winning
+  // (within URGENT_IM_MARGIN Decrees), narrow the tie band so the pick
+  // commits to the single best guess instead of spreading risk across a
+  // wider "close enough" group — a strategic, urgency-driven pick.
+  // Urgency applies in small games too now — a 2-4p Senate one Decree from
+  // losing to the Imperium track needs the same tightened, commit-to-one-guess
+  // proscribe as the standard game, just measured against its own (lower,
+  // separately tunable) threshold and margin.
+  var urgent = smallGame() ? (imWinThreshold()-S.im) <= URGENT_IM_MARGIN_SMALL : (imWinThreshold()-S.im) <= URGENT_IM_MARGIN;
+  var tieBand = urgent ? URGENT_PROSCRIBE_TIE_BAND : PROSCRIBE_TIE_BAND;
+  var maxS = Math.max.apply(null, pool.map(function(p){ return getEffectiveSuspicion(bot,p.id); }));
+  var top = pool.filter(function(p){ return getEffectiveSuspicion(bot,p.id) >= maxS-tieBand; });
+  return choose(narrowByNayVotes(top, false)).id;
+}
+
+// Small strategic refinement: when several proscribe candidates are tied on
+// suspicion, a sharp player also weighs a real public fact nothing above
+// uses yet — how many OTHER players have ever voted Nay on this person as a
+// Consul nominee (nayVotesReceived, cast in full view, not hidden info).
+// The Senate narrows toward whoever carries the MOST accumulated Nay votes
+// (corroborating suspicion from multiple people, not just this one
+// observer's own read); the Conspiracy narrows its "safest, most trusted"
+// pick toward whoever carries the FEWEST (a spotless public record is the
+// strongest sign of a genuine, reliable Senate figure). Never the sole
+// factor — just a tiebreak among an already-tied group.
+function narrowByNayVotes(candidates, wantFewest){
+  if(candidates.length<=1) return candidates;
+  var counts = candidates.map(function(p){ return (p.nayVotesReceived||[]).length; });
+  var target = wantFewest ? Math.min.apply(null, counts) : Math.max.apply(null, counts);
+  var narrowed = candidates.filter(function(p){ return (p.nayVotesReceived||[]).length === target; });
+  return narrowed.length ? narrowed : candidates;
+}
+
+function speedDelay(){
+  if(S.speed==='slow') return 4000;
+  if(S.speed==='fast') return 2000;
+  return 700; // 'off' — original pacing, unchanged
+}
+
+function botWait(label, fn, delay){
+  S.thinkingLabel = label;
+  S.phase = 'bot_wait';
+  render();
+  setTimeout(fn, delay||speedDelay());
+}
+
+// Auto-advance for screens that only ever show a "Continue" button — never
+// for a screen where the human has to actually choose something. At 'off'
+// (the original behavior) nothing here fires; the button always still works
+// as a manual skip-ahead even while a timer is running.
+var autoContinueTimer = null;
+function clearAutoContinue(){
+  if(autoContinueTimer){ clearTimeout(autoContinueTimer); autoContinueTimer = null; }
+}
+function fireContinue(fn){
+  clearAutoContinue();
+  fn();
+}
+function goToGameOver(){ S.phase = 'gameover'; render(); }
+function autoContinueHandler(){
+  switch(S.phase){
+    case 'vote_result': return S.winner ? goToGameOver : afterVoteResultContinue;
+    case 'chaos_result': return S.winner ? goToGameOver : afterChaosContinue;
+    case 'decree_result': return S.winner ? goToGameOver : afterDecreeContinue;
+    case 'power_intro': return beginPower;
+    // Deliberately NOT auto-continued: this is the one screen where the
+    // human picks a dialogue claim (or silence) about what they just
+    // learned — the pace timer must never fire it out from under a
+    // still-undecided choice. See investigateDoneBtn in wireEvents.
+    case 'power_peek_reveal': return finishPeek;
+    case 'power_proscribe_reveal': return S.winner ? goToGameOver : finishProscribe;
+    default: return null;
+  }
+}
+
+/* ---------- Government ---------- */
+function eligibleConsuls(){
+  var alive = alivePlayers();
+  var n = alive.length;
+  return alive.filter(function(p){
+    if(p.id === S.players[S.princepsIndex].id) return false;
+    if(n<=4) return true; // small Senates: term limits waived so there's always a real choice
+    if(p.id === S.previousConsulId) return false;
+    if(n>5 && p.id === S.previousPrincepsId) return false;
+    return true;
+  });
+}
+
+function currentPrinceps(){
+  return S.players[S.princepsIndex];
+}
+
+function advancePrinceps(){
+  var n = S.players.length;
+  var idx = S.princepsIndex;
+  do{
+    idx = (idx+1) % n;
+  } while(!S.players[idx].alive);
+  S.princepsIndex = idx;
+  tickPublicNotices();
+}
+
+function beginNomination(){
+  S.consulId = null;
+  S.nomineeId = null;
+  if(isHuman(currentPrinceps())){
+    S.phase = 'nominate';
+    render();
+  } else {
+    botWait(currentPrinceps().name+' is deliberating a nomination for Consul…', function(){
+      var id = botChooseNominee(currentPrinceps());
+      S.nomineeId = id;
+      var nClaim = botNominateClaim(currentPrinceps());
+      botSpeak(currentPrinceps(), 'nominate', nClaim, byId(id).name);
+      confirmNomination();
+    });
+  }
+}
+
+function confirmNomination(){
+  if(S.nomineeId==null) return;
+  pushLog(currentPrinceps().name+' nominates '+byId(S.nomineeId).name+' for Consul.');
+  S.votes = {};
+  alivePlayers().forEach(function(p){
+    if(!isHuman(p)){
+      var isAye = botVoteChoice(p, S.nomineeId);
+      S.votes[p.id] = isAye;
+      var vClaim = botVoteClaim(p, isAye);
+      botSpeak(p, 'vote', vClaim, byId(S.nomineeId).name);
+    }
+  });
+  // Bot votes are shown openly the moment they're cast (see renderVote), so
+  // there's nothing left to "reveal" — if the human is dead or has already
+  // voted, go straight to the result instead of waiting on an extra tap.
+  if(allVoted()){
+    resolveVote();
+  } else {
+    S.phase = 'vote';
+    render();
+  }
+}
+
+function castVote(pid, val, claimId){
+  S.votes[pid] = val;
+  var voter = byId(pid);
+  if(voter && isHuman(voter)) botSpeak(voter, 'vote', claimId, byId(S.nomineeId) ? byId(S.nomineeId).name : null);
+  if(allVoted()){
+    resolveVote();
+  } else {
+    render();
+  }
+}
+
+function allVoted(){
+  var h = humanPlayer();
+  if(!h || !h.alive) return true;
+  return S.votes.hasOwnProperty(h.id);
+}
+
+function tallyVotes(){
+  var ayes=0, nays=0;
+  alivePlayers().forEach(function(p){ if(S.votes[p.id]) ayes++; else nays++; });
+  return {ayes:ayes,nays:nays};
+}
+
+function resolveVote(){
+  updateVoteTrust(S.nomineeId, currentPrinceps().id);
+  recordNayVotes(S.nomineeId);
+  var t = tallyVotes();
+  var passed = t.ayes > t.nays;
+  S.phase = 'vote_result';
+  S.voteResultPassed = passed;
+  if(passed){
+    var nominee = byId(S.nomineeId);
+    pushLog('Consul '+nominee.name+' confirmed '+t.ayes+'-'+t.nays+'.');
+    if(!smallGame() && S.im>=3 && nominee.role==='imperator'){
+      S.winner='conspirators';
+      S.winReason = nominee.name+' — secretly the Imperator — was confirmed Consul after three Imperium Decrees. Rome falls.';
+      S.phase='gameover';
+    }
+  } else {
+    pushLog('The nomination of '+byId(S.nomineeId).name+' failed '+t.ayes+'-'+t.nays+'.');
+    S.electionTracker++;
+  }
+  render();
+}
+
+function afterVoteResultContinue(){
+  if(S.winner){ render(); return; }
+  if(!S.voteResultPassed){
+    if(S.electionTracker>=3){
+      chaosEnact();
+      return;
+    }
+    advancePrinceps();
+    beginNomination();
+    return;
+  }
+  S.previousConsulId = S.nomineeId;
+  S.previousPrincepsId = currentPrinceps().id;
+  S.consulId = S.nomineeId;
+  S.electionTracker = 0;
+  startLegislative();
+}
+
+function chaosEnact(){
+  ensureDeck(1);
+  var card = S.deck.shift();
+  S.chaosCard = card;
+  applyEnactment(card, true);
+  if(S.winner){ return; } // applyEnactment already moved to gameover and rendered — don't clobber it
+  S.electionTracker = 0;
+  S.previousConsulId = null;
+  S.previousPrincepsId = null;
+  S.phase = 'chaos_result';
+  render();
+}
+
+function afterChaosContinue(){
+  if(S.winner){ render(); return; }
+  advancePrinceps();
+  beginNomination();
+}
+
+/* ---------- Legislative session ---------- */
+function ensureDeck(minNeeded){
+  if(S.deck.length < minNeeded){
+    S.deck = S.deck.concat(shuffle(S.discardPile));
+    S.discardPile = [];
+    pushLog('The decree chest is reshuffled.');
+  }
+}
+
+function startLegislative(){
+  ensureDeck(3);
+  S.drawnThree = [S.deck.shift(), S.deck.shift(), S.deck.shift()];
+  S.discardSelection = [];
+  if(isHuman(currentPrinceps())){
+    S.phase = 'legis_princeps_draw';
+    render();
+  } else {
+    botWait(currentPrinceps().name+' reviews three decrees…', function(){
+      var three = S.drawnThree;
+      var idx = botDiscardChoice(currentPrinceps(), three);
+      var claimId = botDiscardClaim(currentPrinceps(), three);
+      princepsDiscard(idx, claimId);
+    });
+  }
+}
+
+function princepsDiscard(idx, claimId){
+  var princeps = currentPrinceps();
+  botSpeak(princeps, 'discard', claimId);
+  var card = S.drawnThree.splice(idx,1)[0];
+  S.discardPile.push(card);
+  S.handedTwo = S.drawnThree.slice();
+  S.enactSelection = null;
+  S.vetoRequested = false;
+  var consul = byId(S.consulId);
+  if(isHuman(consul)){
+    S.phase = 'legis_consul_draw';
+    render();
+  } else {
+    botWait(consul.name+' weighs the two decrees…', function(){
+      var two = S.handedTwo;
+      var handIsMixed = two[0]!==two[1];
+      var consulSkilled = smartRoll(consul);
+      // Noticing a hand that mechanically hurts your own team is just
+      // reading your own two cards, not strategy — every Consul catches
+      // that regardless of skill. Skill only gates the genuinely strategic
+      // "cover" veto (see consulValuesCover) — there's no more flat-rate
+      // random veto request for an unskilled Consul; a bot with nothing
+      // going on in its hand simply has no reason to ask for one.
+      var trulyForced = forcedEnactmentHurtsTeam(consul, two);
+      var wantsCoverVeto = consulSkilled && !trulyForced && consul.team!=='senate' && handIsMixed &&
+        consulValuesCover(consul) && Math.random()<CONSUL_MIXED_HAND_VETO_PROBABILITY;
+      if(S.im>=vetoThreshold() && (trulyForced || wantsCoverVeto)){
+        var voClaim = botVetoProposeClaim(consul, trulyForced);
+        consulRequestVeto(voClaim);
+        return;
+      }
+      var idx2 = botEnactChoice(consul, two);
+      var enClaim = botEnactClaim(consul, two, two[idx2], handIsMixed);
+      consulEnact(idx2, enClaim);
+    });
+  }
+}
+
+function consulRequestVeto(claimId){
+  S.vetoRequested = true;
+  pushLog(byId(S.consulId).name+' proposes a joint veto.');
+  botSpeak(byId(S.consulId), 'veto_propose', claimId);
+  if(isHuman(currentPrinceps())){
+    S.phase = 'veto_princeps_decide';
+    render();
+  } else {
+    botWait(currentPrinceps().name+' considers the Consul\'s veto…', function(){
+      var accept = botVetoChoice(currentPrinceps(), S.handedTwo, S.consulId);
+      var reClaim = accept ? botVetoAcceptClaim(currentPrinceps()) : botVetoRefuseClaim(currentPrinceps());
+      princepsAcceptVeto(accept, reClaim);
+    });
+  }
+}
+
+function princepsAcceptVeto(accept, claimId){
+  botSpeak(currentPrinceps(), accept ? 'veto_accept' : 'veto_refuse', claimId);
+  if(accept){
+    S.handedTwo.forEach(function(c){S.discardPile.push(c);});
+    S.handedTwo = [];
+    pushLog('Princeps and Consul jointly veto the decrees. None enacted.');
+    // Agreeing to veto already says what happens — no separate result
+    // screen needed, straight on to the next nomination.
+    afterVetoContinue();
+  } else {
+    pushLog('Princeps refuses the veto. The Consul must choose.');
+    var consul = byId(S.consulId);
+    if(isHuman(consul)){
+      S.phase = 'legis_consul_draw';
+      render();
+    } else {
+      // A bot Consul proposed the veto and got refused — nothing else was
+      // going to re-trigger their enact decision (the only other place that
+      // fires it is princepsDiscard's own bot branch, which we've already
+      // passed), so without this the game would sit on legis_consul_draw
+      // forever showing a human-only screen with no human to click it.
+      S.phase = 'legis_consul_draw';
+      botWait(consul.name+' must choose after all…', function(){
+        var two = S.handedTwo;
+        var handIsMixed = two[0]!==two[1];
+        var idx2 = botEnactChoice(consul, two);
+        var enClaim = botEnactClaim(consul, two, two[idx2], handIsMixed);
+        consulEnact(idx2, enClaim);
+      });
+    }
+  }
+}
+
+function afterVetoContinue(){
+  advancePrinceps();
+  beginNomination();
+}
+
+function consulEnact(idx, claimId){
+  var enacted = S.handedTwo[idx];
+  var discarded = S.handedTwo[1-idx];
+  var handWasMixed = enacted !== discarded; // Consul had a genuine choice, not a forced hand
+  botSpeak(byId(S.consulId), 'enact', claimId);
+  S.discardPile.push(discarded);
+  S.handedTwo = [];
+  applyEnactment(enacted, false, handWasMixed);
+}
+
+function applyEnactment(card, isChaos, handWasMixed){
+  if(!isChaos){
+    updatePublicSuspicion(currentPrinceps().id, S.consulId, card, S.rp, S.im, handWasMixed);
+  }
+  if(card==='RP'){ S.rp++; } else { S.im++; }
+  var imTotal = imWinThreshold();
+  var princepsName = isChaos ? null : currentPrinceps().name;
+  var consulName = isChaos ? null : byId(S.consulId).name;
+  S.enactmentHistory.push({card:card, princepsName:princepsName, consulName:consulName, isChaos:!!isChaos});
+  pushLog((isChaos?'Chaos enacts':'Enacted')+' a '+(card==='RP'?'Res Publica':'Imperium')+' Decree ('+(card==='RP'?S.rp+'/5':S.im+'/'+imTotal)+')'+(isChaos?'':' — Princeps '+princepsName+' &amp; Consul '+consulName)+'.');
+
+  if(S.rp>=5){
+    S.winner='senate';
+    S.winReason='Five Res Publica Decrees have restored the Republic.';
+    S.phase='gameover';
+    render();
+    return;
+  }
+  if(S.im>=imTotal){
+    S.winner='conspirators';
+    S.winReason=imTotal+' Imperium Decrees have dissolved the Senate.';
+    S.phase='gameover';
+    render();
+    return;
+  }
+
+  if(!isChaos && card==='IM'){
+    var tier = powerTier(S.count);
+    var power = POWER_TABLE[tier][S.im];
+    if(power){
+      S.pendingPower = power;
+      S.phase = 'power_intro';
+      render();
+      return;
+    }
+  }
+  S.phase = isChaos ? 'chaos_result' : 'decree_result';
+  render();
+}
+
+/* ---------- Powers ---------- */
+function beginPower(){
+  var princeps = currentPrinceps();
+  if(S.pendingPower==='investigate'){
+    if(isHuman(princeps)){
+      S.investigateTargetId=null; S.investigateResult=null;
+      S.phase='power_investigate_pick';
+      render();
+    } else {
+      botWait(princeps.name+' opens an investigation…', function(){
+        var targetId = botInvestigateChoice(princeps);
+        var target = byId(targetId);
+        var foundEnemy = target.team !== princeps.team;
+        princeps.intel[targetId] = foundEnemy ? 'enemy' : 'loyal';
+        if(foundEnemy) markConfirmedEnemy(princeps, target);
+        target.investigated = true;
+        S.investigateLog.push({investigatorName:princeps.name, targetName:target.name, result:(target.role==='senator'?'Loyal to the Republic':'Enemy of the Republic')});
+        addPublicNotice(princeps.name+' investigated '+target.name+' (result kept private)');
+        pushLog(princeps.name+' investigates '+target.name+', in full view of the Curia — the result stays private to them.');
+        var claim = botInvestigateRevealClaim(princeps, foundEnemy);
+        recordInvestigateClaim(princeps, target, claim.claimId, claim.claimedLoyal);
+        S.pendingPower = null;
+        S.phase = 'decree_result';
+        render();
+      });
+    }
+  } else if(S.pendingPower==='special_election'){
+    if(isHuman(princeps)){
+      S.specialElectionPicked=null;
+      S.phase='power_special_pick';
+      render();
+    } else {
+      botWait(princeps.name+' calls a Special Comitia…', function(){
+        var id = botSpecialChoice(princeps);
+        var sClaim = botSpecialElectionClaim(princeps);
+        specialElectionPick(id, sClaim);
+      });
+    }
+  } else if(S.pendingPower==='peek'){
+    if(isHuman(princeps)){
+      ensureDeck(3);
+      S.peekCards = [S.deck[0], S.deck[1], S.deck[2]];
+      S.phase='power_peek_reveal';
+      render();
+    } else {
+      botWait(princeps.name+' foresees the path ahead…', function(){
+        S.peekLog.push({name:princeps.name});
+        pushLog(princeps.name+' foresees the next three decrees.');
+        S.pendingPower = null;
+        S.phase = 'decree_result';
+        render();
+      });
+    }
+  } else if(S.pendingPower==='proscribe'){
+    if(isHuman(princeps)){
+      S.proscribeTargetId=null;
+      S.phase='power_proscribe_pick';
+      render();
+    } else {
+      botWait(princeps.name+' names someone for proscription…', function(){
+        var id = botProscribeChoice(princeps);
+        var pClaim = botProscribeClaim(princeps);
+        proscribePick(id, pClaim);
+      });
+    }
+  }
+}
+
+function investigatePick(id){
+  var target = byId(id);
+  var princeps = currentPrinceps();
+  S.investigateTargetId = id;
+  S.investigateResult = (target.role==='senator') ? 'Loyal to the Republic' : 'Enemy of the Republic';
+  target.investigated = true;
+  var foundEnemy = target.team !== princeps.team;
+  princeps.intel[id] = foundEnemy ? 'enemy' : 'loyal';
+  if(foundEnemy) markConfirmedEnemy(princeps, target);
+  S.phase = 'power_investigate_reveal';
+  render();
+}
+
+function finishInvestigate(claimId){
+  var princeps = currentPrinceps();
+  var target = byId(S.investigateTargetId);
+  S.investigateLog.push({investigatorName:princeps.name, targetName:target.name, result:S.investigateResult});
+  addPublicNotice(princeps.name+' investigated '+target.name+' (result kept private)');
+  pushLog(princeps.name+' investigates '+target.name+', in full view of the Curia — the result stays private to them.');
+  var claimedLoyal = claimId==='ir_loyal' ? true : (claimId==='ir_enemy' ? false : null);
+  recordInvestigateClaim(princeps, target, claimId, claimedLoyal);
+  S.pendingPower = null;
+  S.phase = 'decree_result';
+  render();
+}
+
+// Shared by both the bot and human investigate-reveal paths: speaks the
+// chosen claim into the log, then — if the claim actually asserted a
+// loyalty verdict (not silence/private/inconclusive) — records it as a
+// public vouch and immediately cross-checks it against every OTHER
+// player's own personal intel on the same target. Anyone who already
+// privately knows the truth catches a contradicting claim as an outright,
+// certain lie (same certainty tier as a personal Investigate result).
+function recordInvestigateClaim(investigator, target, claimId, claimedLoyal){
+  botSpeak(investigator, 'investigate_reveal', claimId, target.name);
+  if(claimedLoyal===null || claimedLoyal===undefined) return;
+  if(!S.investigateVouches[target.id]) S.investigateVouches[target.id] = [];
+  S.investigateVouches[target.id].push({investigatorId:investigator.id, claimedLoyal:claimedLoyal});
+  S.players.forEach(function(observer){
+    if(observer.id===investigator.id) return;
+    var truth = observer.intel[target.id];
+    if(truth===undefined) return;
+    var truthIsLoyal = (truth==='loyal');
+    if(truthIsLoyal !== claimedLoyal) markConfirmedEnemy(observer, investigator);
+  });
+}
+
+function specialElectionPick(id, claimId){
+  S.specialElectionPicked = id;
+  botSpeak(currentPrinceps(), 'special_election', claimId, byId(id).name);
+  pushLog(currentPrinceps().name+' calls a Special Comitia, naming '+byId(id).name+' to preside next.');
+  S.pendingPower = null;
+  S.phase = 'decree_result';
+  S.specialElectionActive = true;
+  render();
+}
+
+function finishPeek(){
+  S.peekLog.push({name:currentPrinceps().name});
+  pushLog(currentPrinceps().name+' foresees the next three decrees.');
+  S.pendingPower = null;
+  S.phase = 'decree_result';
+  render();
+}
+
+function knowsAlly(player, targetId){
+  return knownAllies(player).indexOf(targetId)!==-1;
+}
+
+function proscribePick(id, claimId){
+  S.proscribeTargetId = id;
+  var target = byId(id);
+  var princeps = currentPrinceps();
+  botSpeak(princeps, 'proscribe', claimId, target.name);
+  if(smallGame() && isHuman(princeps) && knowsAlly(princeps, id)){
+    // Betraying a known ally is a personal loss for the human player — but it
+    // stays hidden until the final reveal, exactly like the rest of the table.
+    S.betrayal = {playerId:princeps.id, targetName:target.name};
+  }
+  // Logged here, immediately — not in finishProscribe(), which the WINNING
+  // proscribe (target is the Imperator) skips entirely by jumping straight
+  // to "See final reveal." Logging it only in finishProscribe() meant the
+  // single decisive action of the game was silently missing from the record.
+  pushLog(princeps.name+' proscribes '+target.name+'.');
+  applyProscribeTrust(princeps, target);
+  target.alive = false;
+  S.phase = 'power_proscribe_reveal';
+  if(target.role==='imperator'){
+    S.winner='senate';
+    S.winReason = target.name+' — the hidden Imperator — has been proscribed. The conspiracy collapses.';
+  } else {
+    var survivors = alivePlayers();
+    if(survivors.length===1){
+      var last = survivors[0];
+      S.winner = last.team==='senate' ? 'senate' : 'conspirators';
+      S.winReason = last.name+' stands alone in the Curia — every other senator has been proscribed.';
+    }
+  }
+  render();
+}
+
+function skipProscribe(claimId){
+  var princeps = currentPrinceps();
+  var topSuspect = topSuspectFor(princeps);
+  botSpeak(princeps, 'proscribe_skip', claimId, topSuspect ? topSuspect.name : null);
+  pushLog(princeps.name+' declines to proscribe anyone this term.');
+  S.pendingPower = null;
+  S.phase = 'decree_result';
+  render();
+}
+
+function finishProscribe(){
+  var target = byId(S.proscribeTargetId);
+  S.pendingPower = null;
+  if(S.winner){
+    S.phase='gameover';
+    render();
+    return;
+  }
+  S.phase = 'decree_result';
+  render();
+}
+
+/* ---------- After decree result: advance ---------- */
+function afterDecreeContinue(){
+  if(S.winner){ render(); return; }
+  if(S.specialElectionActive){
+    S.specialElectionActive = false;
+    var idx = S.players.findIndex(function(p){return p.id===S.specialElectionPicked;});
+    S.princepsIndex = idx;
+    S.specialElectionPicked = null;
+    beginNomination();
+    return;
+  }
+  advancePrinceps();
+  beginNomination();
+}
+
+/* ---------- Rendering ---------- */
+// A filled track slot's small attribution note: who was Princeps and Consul
+// when that particular card was enacted, so a glance at the track (not just
+// the scrolling log) shows the combo behind each Decree. Just the initials
+// fit in the card; the full names ride along as a hover/tap title. A card
+// forced through by Chaos (three failed nominations in a row) had no real
+// Princeps/Consul choice behind it, so it gets a plain "Chaos" note instead.
+function trackNoteHtml(entry){
+  if(!entry) return '';
+  if(entry.isChaos) return '<div class="tnote">Chaos</div>';
+  var title = 'Princeps '+entry.princepsName+' &amp; Consul '+entry.consulName;
+  return '<div class="tnote" title="'+title.replace(/"/g,'&quot;')+'">'+initialsOf(entry.princepsName)+'&middot;'+initialsOf(entry.consulName)+'</div>';
+}
+function trackHtml(){
+  var tier = powerTier(S.count);
+  var powers = POWER_TABLE[tier];
+  var rpHistory = S.enactmentHistory.filter(function(e){ return e.card==='RP'; });
+  var imHistory = S.enactmentHistory.filter(function(e){ return e.card==='IM'; });
+  var rpSlots='';
+  for(var i=1;i<=5;i++){
+    var filled = i<=S.rp;
+    var isWinSlot = (i===5);
+    var rcls = 'trackcard'+(filled?' filled rp':'')+(isWinSlot&&!filled?' win':'');
+    var rinner;
+    if(filled){
+      rinner = '<div class="tlabel">Res<br>Publica</div>'+trackNoteHtml(rpHistory[i-1]);
+    } else if(isWinSlot){
+      rinner = '<div class="ticon">'+WIN_ICON.rp+'</div><div class="tlabel">Victory</div>';
+    } else {
+      rinner = '<div class="tlabel">'+i+'</div>';
+    }
+    rpSlots += '<div class="'+rcls+'">'+rinner+'</div>';
+  }
+  var imTotal = imWinThreshold();
+  // In standard games (5-10 players), electing the Imperator as Consul is an
+  // instant Conspiracy win once 3+ Imperium Decrees are enacted — mark the
+  // slots from that point on so the danger is visible on the track itself.
+  var imperatorDanger = !smallGame();
+  var imSlots='';
+  for(var i=1;i<=imTotal;i++){
+    var filled = i<=S.im;
+    var pw = powers[i];
+    var isWinSlot = (i===imTotal);
+    var isDanger = imperatorDanger && (i>=4);
+    var cls = 'trackcard'+(filled?' filled im':'')+(pw?' power':'')+(isWinSlot&&!filled?' win':'')+(isDanger&&!filled?' danger':'');
+    var inner;
+    if(filled){
+      inner = '<div class="tlabel">Imperium</div>'+trackNoteHtml(imHistory[i-1]);
+    } else if(isWinSlot){
+      inner = '<div class="ticon">'+WIN_ICON.im+'</div><div class="tlabel">Victory</div>'+(isDanger?'<div class="tdanger">Imperator wins</div>':'');
+    } else if(pw){
+      inner = '<div class="ticon">'+POWER_ICON[pw]+'</div><div class="tlabel">'+POWER_LABEL[pw]+'</div>'+(isDanger?'<div class="tdanger">Imperator wins</div>':'');
+    } else {
+      inner = '<div class="tlabel">'+i+'</div>'+(isDanger?'<div class="tdanger">Imperator wins</div>':'');
+    }
+    imSlots += '<div class="'+cls+'">'+inner+'</div>';
+  }
+  return '' +
+  '<div class="trackwrap"><div class="eyebrow">Res Publica &middot; '+S.rp+'/5</div><div class="track">'+rpSlots+'</div></div>' +
+  '<div class="trackwrap" style="margin-top:14px"><div class="eyebrow">Imperium &middot; '+S.im+'/'+imTotal+'</div><div class="track">'+imSlots+'</div></div>' +
+  (imperatorDanger?'<div class="small" style="color:#8b1a1a">After 3 Imperium Decrees, electing the Imperator as Consul ends the game right away — the dark red slots mark that danger zone.</div>':'') +
+  '<div class="trackwrap" style="margin-top:14px"><div class="eyebrow">The Decree Chest</div><div class="track">' +
+    '<div class="trackcard deck"><div class="ticon">'+DECK_ICON+'</div><div class="tcount">'+S.discardPile.length+'</div><div class="tlabel">Discarded</div></div>' +
+    '<div class="trackcard deck"><div class="ticon">'+DECK_ICON+'</div><div class="tcount">'+S.deck.length+'</div><div class="tlabel">Remaining</div></div>' +
+  '</div></div>';
+}
+
+function publicNoticesHtml(){
+  if(!S.publicNotices.length) return '';
+  return '<div class="row notices">' +
+    S.publicNotices.map(function(n){
+      return '<span class="pill notice">'+POWER_ICON.investigate+'<span>'+n.text+'</span></span>';
+    }).join('') +
+  '</div>';
+}
+
+function seatsHtml(){
+  if(!S.players.length) return '';
+  var princepsId = currentPrinceps().id;
+  var consulId = S.consulId;
+  return '<div class="seats">' +
+    S.players.map(function(p){
+      var isPrinceps = p.id===princepsId;
+      var isConsul = consulId!=null && p.id===consulId;
+      var cls = 'seat' + (!p.alive?' dead':'') + (isPrinceps?' princeps':'') + (isConsul?' consul':'');
+      var badges = '';
+      if(isPrinceps) badges += '<span class="seatbadge princeps">Princeps</span>';
+      if(isConsul) badges += '<span class="seatbadge consul">Consul</span>';
+      return '<div class="'+cls+'">' +
+        '<span class="seatname">'+avatarHtml(p,20)+' '+p.name+(p.isHuman?' <span class="seatyou">(you)</span>':'')+'</span>' +
+        (badges?'<span class="seatbadges">'+badges+'</span>':'') +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+function statusBarHtml(){
+  if(!S.players.length) return '';
+  var p = currentPrinceps();
+  var c = S.consulId!=null ? byId(S.consulId) : null;
+  var h = humanPlayer();
+  return '<div class="statusbar">' +
+    topVoteHtml() +
+    '<div class="spread"><h1>The Conspirators of Rome</h1><span class="pill">'+S.electionTracker+'/3 Chaos</span></div>' +
+    '<div class="row">' +
+      (h?'<span class="pill on">You: '+roleLabel(h.role)+'</span>':'') +
+      '<span class="pill">Princeps: '+p.name+'</span>' +
+      (c?'<span class="pill">Consul: '+c.name+'</span>':'') +
+    '</div>' +
+    seatsHtml() +
+    publicNoticesHtml() +
+    (activeTutorialTip()==='track' ? tutorialCalloutHtml('track') : '') +
+    trackHtml() +
+  '</div>';
+}
+
+// Shows the most recent dialogue line — whoever last spoke, said openly, in
+// plain view of the table — right at the top of the screen, not buried down
+// in the scrolling log. Covers the "Curia waits" spinner too (see render()),
+// so it reads as spoken live while that player's turn is actually happening,
+// not just as a record after the fact. Clears the moment the next player
+// stays silent, so nothing stale lingers past its own turn.
+function speechBubbleHtml(){
+  if(!S.lastSpeech) return '';
+  var speaker = byId(S.lastSpeech.playerId);
+  return '<div class="speechBubble">' +
+    (speaker ? avatarHtml(speaker,28) : '') +
+    '<div class="speechBubbleBody"><span class="speechBubbleName">'+S.lastSpeech.name+'</span>' +
+    '<span class="speechBubbleText">"'+S.lastSpeech.text+'"</span></div>' +
+  '</div>';
+}
+
+// Small private notepad for the human player — "Wax Tablet". Freeform text,
+// never read by bots, never shown to anyone else, not saved into the round
+// recap or the log. Kept open/closed across re-renders via notesPanelOpen
+// (a plain module var, not part of S — it's UI chrome, not game state).
+var notesPanelOpen = false;
+function notesHtml(){
+  var val = (S.personalNotes||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  return '<details class="card notesCard"'+(notesPanelOpen?' open':'')+'>' +
+    '<summary>Wax Tablet <span class="small" style="font-weight:400">— your private notes</span></summary>' +
+    '<textarea id="personalNotesArea" class="waxTablet" placeholder="Suspicions, votes to remember, anything you like. Only you see this.">'+val+'</textarea>' +
+  '</details>';
+}
+
+function overlayWrap(inner){
+  return '<div class="overlay"><div class="card">'+inner+'</div></div>';
+}
+
+function renderLog(full){
+  if(!S.log.length) return '';
+  var entries = full ? S.log : S.log.slice(0,12);
+  return '<div class="card"><h3>Record of the Senate</h3><div class="log">'+
+    entries.map(function(l){return '<div>— '+l+'</div>';}).join('') +
+  '</div></div>';
+}
+
+// Mid-game intel access. Two separate panels, deliberately kept apart:
+// "My confirmed intel" is the human's own private Investigate Loyalty
+// results — theirs alone, same information a real player would just have
+// to remember. "Investigations & Foresight so far" is the WHO, not the
+// RESULT — who investigated or foresaw whom, over the whole game, not just
+// the 3-round public-notice window — exactly what's legitimately public.
+// Results stay private to whoever performed the power, same as in play.
+function renderIntelPanel(){
+  var h = humanPlayer();
+  var allyHtml = '';
+  if(h && h.role!=='senator'){
+    // Only the players who were actually told their allies at the reveal
+    // screen (conspiratorTeammates()) ever see this panel — a senator, or a
+    // conspirator/Imperator in a game size where nobody is shown allies,
+    // gets nothing here, exactly mirroring what renderReveal() showed them.
+    var mates = conspiratorTeammates(h);
+    if(mates.length){
+      allyHtml = '<details class="card" open><summary>Your fellow conspirators</summary>' +
+        mates.map(function(t){return '<div class="playerchip">'+avatarHtml(t,20)+' '+t.name+(t.role==='imperator'?' <span class="badge-consul">IMPERATOR</span>':'')+'</div>';}).join('') +
+      '</details>';
+    }
+  }
+  var mineHtml = '';
+  if(h){
+    var entries = Object.keys(h.intel).map(function(id){
+      var t = byId(parseInt(id,10));
+      if(!t) return null;
+      return '<div>&mdash; '+t.name+': <strong>'+(h.intel[id]==='loyal'?'Loyal to the Republic':'Enemy of the Republic')+'</strong></div>';
+    }).filter(function(x){ return x; });
+    mineHtml = '<details class="card"><summary>My confirmed intel'+(entries.length?' ('+entries.length+')':'')+'</summary>' +
+      (entries.length ? entries.join('') : '<div>You haven\'t found out anyone\'s true side yet.</div>') +
+    '</details>';
+  }
+  var historyHtml = '';
+  if(S.investigateLog.length || S.peekLog.length){
+    var invRows = S.investigateLog.map(function(e){ return '<div>&mdash; '+e.investigatorName+' investigated '+e.targetName+' (only they know the result)</div>'; }).join('');
+    var peekRows = S.peekLog.map(function(e){ return '<div>&mdash; '+e.name+' peeked at the next cards (only they know what they saw)</div>'; }).join('');
+    historyHtml = '<details class="card"><summary>Investigations &amp; Foresight so far</summary>' + invRows + peekRows + '</details>';
+  }
+  return allyHtml + mineHtml + historyHtml + aiPrimerHtml();
+}
+
+function render(){
+  var app = document.getElementById('app');
+  var html = '';
+
+  if(S.phase==='setup'){
+    html = renderSetup();
+  } else if(S.phase==='reveal'){
+    html = renderReveal();
+  } else {
+    // The log (where every spoken dialogue line lands) now stays visible
+    // even on the "Curia waits" spinner screen, so a line someone just
+    // spoke is still "heard" by the table while the next player thinks —
+    // it no longer vanishes the instant the spinner comes up. The private
+    // intel panel stays hidden during bot_wait; nothing new to show there
+    // mid-turn, and it's a lot of extra chrome under a moment meant to feel
+    // like a brief pause, not a full screen.
+    html = statusBarHtml() + speechBubbleHtml() + notesHtml() + renderPhase() + (S.phase==='gameover' ? '' : (S.phase==='bot_wait' ? renderLog() : (renderIntelPanel() + renderLog())));
+  }
+  // The notes textarea can be re-rendered out from under the player mid-
+  // keystroke (a bot-turn timer calls render() independently of typing), so
+  // capture focus + cursor position beforehand and restore it after the
+  // innerHTML rebuild — otherwise a full rebuild silently steals focus and
+  // resets the cursor to the start even though S.personalNotes stays correct.
+  var notesFocused = (document.activeElement && document.activeElement.id==='personalNotesArea');
+  var notesSelStart = notesFocused ? document.activeElement.selectionStart : null;
+  var notesSelEnd = notesFocused ? document.activeElement.selectionEnd : null;
+  app.innerHTML = html;
+  if(notesFocused){
+    var restoredNotes = document.getElementById('personalNotesArea');
+    if(restoredNotes){
+      restoredNotes.focus();
+      try{ restoredNotes.setSelectionRange(notesSelStart, notesSelEnd); }catch(e){}
+    }
+  }
+  wireEvents();
+  clearAutoContinue();
+  if(S.speed!=='off'){
+    var autoFn = autoContinueHandler();
+    if(autoFn) autoContinueTimer = setTimeout(function(){ autoContinueTimer=null; autoFn(); }, speedDelay());
+  }
+  try{
+    if(window.claude && window.claude.hot && window.claude.hot.snapshot){
+      window.claude.hot.snapshot(S);
+    }
+  }catch(e){}
+}
+
+function renderSetup(){
+  var small = smallGame();
+  var imperatorToggle = '';
+  if(S.count===3 || S.count===4){
+    imperatorToggle = '<div class="card">' +
+      '<h2>Include the Imperator?</h2>' +
+      '<p class="small">Optional at this size. If it\'s on, the Imperator role replaces one Conspirator — though it might not actually be dealt to anyone.</p>' +
+      '<p class="small warn">Leaving the Imperator out removes a win condition from both sides: the Senate loses its "proscribe the Imperator" shortcut, and the Conspiracy loses its "elect the Imperator as Consul" shortcut. The game just becomes a race to 5 Decrees of one type — and that favors the Conspiracy, since Imperium cards outnumber Res Publica cards 2 to 1.</p>' +
+      '<div class="row">' +
+        '<button data-imperator="1" class="'+(S.includeImperator?'primary':'')+'">Include</button>' +
+        '<button data-imperator="0" class="'+(!S.includeImperator?'primary':'')+'">Omit</button>' +
+      '</div>' +
+    '</div>';
+  }
+  var smallNote = small
+    ? '<p class="small">Small-Senate rules: roles come from a short deck ('+(S.count<=2?'2 Senators + 2 Conspirators, '+S.count+' dealt':'3 Senators + 2 Conspirators, '+S.count+' dealt')+'; one Conspirator becomes the Imperator if included, but might not be dealt). The 3rd Imperium Decree grants Investigate Loyalty, the 4th grants Proscribe, a joint veto opens at the 4th Imperium Decree, and the Conspirators win at 5 Imperium Decrees instead of 6. Electing the Imperator as Consul does not instantly win here — only proscribing them (which reveals who they are) ends the game early.</p>'
+    : '';
+  return '<div class="card">' +
+    '<div class="eyebrow">Solo &middot; You + Bots</div>' +
+    '<h1>The Conspirators of Rome</h1>' +
+    '<p class="small">Rome is in danger. Hidden Conspirators sit somewhere in the Senate — maybe even a secret Imperator. Senators pass Res Publica Decrees to save Rome; Conspirators push Imperium Decrees toward tyranny. Your fellow senators are bots — they read the room, bluff, and explain their moves out loud, just like real players would.</p>' +
+  '</div>' +
+  '<div class="card">' +
+    '<details open><summary><h2 style="display:inline">How to play — the quick version</h2></summary>' +
+    '<div class="stack" style="margin-top:6px">' +
+      '<div><strong>1. Two secret sides.</strong> Senator (good) or Conspirator (maybe the Imperator, their leader). Conspirators know each other; Senators know no one\'s role.</div>' +
+      '<div><strong>2. Each round.</strong> The Princeps ("President") picks a Consul ("Vice President"). Everyone votes Aye or Nay on that pair.</div>' +
+      '<div><strong>3. If it passes.</strong> Princeps draws 3 cards (Res Publica or Imperium), discards 1. Then gives the 2 cards to the Consul, who enacts one of them.</div>' +
+      '<div><strong>4. Win condition.</strong> Senate wins at 5 Res Publica played. Conspiracy wins at 5 or 6 Imperium played.</div>' +
+    '</div>' +
+    '<p class="small warn" style="margin-top:6px">The bots aren\'t just watching each other — they\'re watching YOU too, and judge your votes, picks, and words exactly like anyone else\'s.</p>' +
+    '</details>' +
+    '<details style="margin-top:10px"><summary><h3 style="display:inline">More detail — read this once you\'ve got the basics</h3></summary>' +
+    '<div class="stack" style="margin-top:6px">' +
+      '<div><strong>Imperium cards unlock powers.</strong> Playing enough of them lets the Princeps peek at future cards, secretly investigate one player\'s true side, choose the next Princeps, or proscribe someone — kick them out of the Senate for the rest of the game.</div>' +
+      '<div><strong>There are other ways to win.</strong> Conspirators also win if the Imperator gets elected Consul later in the game, or if they\'re the only side left standing. Watch for the warnings on screen once that danger is live.</div>' +
+      '<div><strong>Later on, there\'s a veto.</strong> Once enough Imperium cards are out, the Princeps and Consul can agree to throw away both cards instead of playing one.</div>' +
+      '<div><strong>Pay attention to what people say and how they vote.</strong> That\'s your best clue for figuring out who\'s secretly a Conspirator — nobody\'s hidden role is ever shown to you directly.</div>' +
+    '</div>' +
+    '</details>' +
+  '</div>' +
+  '<div class="card">' +
+    '<h2>Tutorial</h2>' +
+    '<p class="small">Just you, one bot Senator, and one bot Conspirator, no timer, and you go first. To keep it easy to read, the bot plays its side plainly — no sleepers, no bluffing about "having no choice." Pop-up tips point at exactly what\'s happening and what to do at each step. Everything else below is for when you set up your own game.</p>' +
+    '<button class="primary full" id="tutorialBtn">Play the tutorial</button>' +
+  '</div>' +
+  '<div class="card">' +
+    '<h2>Your name</h2>' +
+    '<input type="text" id="humanNameInput" placeholder="Your name" value="'+(S.humanName||'').replace(/"/g,'&quot;')+'">' +
+  '</div>' +
+  '<div class="card">' +
+    '<h2>Senate size</h2>' +
+    '<div class="row" id="countrow">' +
+      [2,3,4,5,6,7,8,9,10].map(function(n){return '<button data-count="'+n+'" class="'+(S.count===n?'primary':'')+'">'+n+'</button>';}).join('') +
+    '</div>' +
+    '<p class="small">You, plus '+(S.count-1)+' bot senators.</p>' +
+    smallNote +
+  '</div>' +
+  imperatorToggle +
+  '<div class="card">' +
+    '<h2>Game pace</h2>' +
+    '<p class="small">Screens that just show a result and wait for a tap — a bot\'s move, a decree being enacted, a power\'s outcome — can move on by themselves on a timer instead. Anything that needs YOUR choice (nominations, votes, discards, picks) always waits for you, no matter the setting.</p>' +
+    '<div class="row">' +
+      '<button data-speed="slow" class="'+(S.speed==='slow'?'primary':'')+'">Slow (4s)</button>' +
+      '<button data-speed="fast" class="'+(S.speed==='fast'?'primary':'')+'">Fast (2s)</button>' +
+      '<button data-speed="off" class="'+(S.speed==='off'?'primary':'')+'">No timer</button>' +
+    '</div>' +
+  '</div>' +
+  '<div class="card">' +
+    '<h2>Difficulty</h2>' +
+    '<p class="small">Only ever changes how well the OTHER bots play — never your own choices. Your fellow senators (or conspirators) are your teammates; everyone on the other side is your opponent, whichever role you get.</p>' +
+    '<div class="stack">' +
+      '<button data-difficulty="easy" class="namebtn'+(S.difficulty==='easy'?' selected':'')+'"><b>Easy</b> — your teammates play well, your opponents play poorly.</button>' +
+      '<button data-difficulty="medium" class="namebtn'+(S.difficulty==='medium'?' selected':'')+'"><b>Medium</b> — everyone plays about the same, average level.</button>' +
+      '<button data-difficulty="hard" class="namebtn'+(S.difficulty==='hard'?' selected':'')+'"><b>Hard</b> — your opponents play well, your teammates play poorly.</button>' +
+      '<button data-difficulty="impossible" class="namebtn'+(S.difficulty==='impossible'?' selected':'')+'"><b>Impossible</b> — your opponents play nearly perfectly, your teammates barely help.</button>' +
+    '</div>' +
+  '</div>' +
+  aiPrimerHtml() +
+  pastGamesHtml() +
+  '<button class="primary full" id="beginBtn">Draw Lots &amp; Assign Roles</button>';
+}
+
+// The last 3 completed games, saved to this browser only (localStorage) —
+// never sent anywhere, never shared with anyone else who opens this page.
+// Each is copyable as plain text so it can be pasted elsewhere for review.
+function pastGamesHtml(){
+  var history = loadGameHistory();
+  if(!history.length) return '';
+  return '<div class="card">' +
+    '<h2>Past games ('+history.length+')</h2>' +
+    '<p class="small">Saved on this device only — your last '+GAME_HISTORY_MAX+' finished games.</p>' +
+    '<div class="stack">' +
+      history.map(function(record, i){
+        var when = new Date(record.timestamp).toLocaleString();
+        var winnerLabel = record.winner==='senate' ? 'Senate won' : 'Conspirators won';
+        return '<details><summary>'+when+' &mdash; '+record.count+'p &mdash; '+winnerLabel+'</summary>' +
+          '<div>'+record.winReason+'</div>' +
+          '<div class="stack" style="margin-top:8px">' +
+            record.players.map(function(p){ return '<div>&mdash; '+p.name+(p.isHuman?' (you)':'')+': '+roleLabel(p.role)+'</div>'; }).join('') +
+          '</div>' +
+          '<button class="ghost full" data-copy-history="'+i+'" style="margin-top:10px">Copy full record</button>' +
+        '</details>';
+      }).join('') +
+    '</div>' +
+  '</div>';
+}
+
+// Accessible from setup (and, once a game is underway, the Curia Record
+// panel via renderIntelPanel). Explains bot behavior that would otherwise
+// look like inconsistency or randomness — sleeper cover play, strategic
+// proscribing, and late-game obstruction — as documented strategy rather
+// than the AI "forgetting" to act in character.
+function aiPrimerHtml(){
+  return '<div class="card">' +
+    '<h3>How your opponents play</h3>' +
+    '<p class="small">Bots only use fair information — public votes and enacted cards, never hidden roles. Most play their side in a straightforward way, but a few hide their true colors for a while, and everyone reads voting patterns as evidence.</p>' +
+    '<details><summary>Read the full breakdown</summary>' +
+      '<div>Your fellow senators, and any Conspirators or the Imperator, are bots. They never cheat by peeking at hidden roles — everything they do comes from what a real player could fairly work out: public votes, who enacted what, and their own private Investigate Loyalty results.</div>' +
+      '<div><strong>Most Conspirators play it straight</strong> — pushing Imperium Decrees and backing their own side\'s votes whenever they hold power. But not all of them, and not always:</div>' +
+      '<div>&mdash; Some Conspirators (especially the Imperator, who has the most to gain from staying hidden) start the game as a <strong>"sleeper"</strong> — a few who play it safe and act like a loyal Senator for a while, to avoid suspicion. They\'ll drop the act once things get dangerous, once an Investigate confirms them, or eventually just by chance.</div>' +
+      '<div>&mdash; Late in a close game, some Conspirators will <strong>vote Nay on a government that looks trustworthy</strong> instead of automatically backing it — denying the Senate an easy Res Publica Decree. This only happens sometimes, not by default, so an odd vote from a normally reliable player is itself a real clue.</div>' +
+      '<div>&mdash; When proscribing, Conspirators go after anyone who they know has already confirmed their identity, then any confirmed enemy, and otherwise target whoever currently looks MOST trustworthy — that\'s their best guess at a real, reliable Senate figure. The Senate\'s own proscribe logic works the same way in reverse: confirmed enemies first, then whoever looks most suspicious.</div>' +
+      '<div>&mdash; The Senate gets more cautious with its votes once things turn dangerous, and it also watches voting patterns the same way: an Aye on a risky-looking pair, or a Nay on a safe-looking one, quietly changes how trustworthy that voter looks from then on.</div>' +
+    '</details>' +
+  '</div>';
+}
+
+function renderReveal(){
+  var p = humanPlayer();
+  if(!S.revealShown){
+    return overlayWrap(
+      '<div class="eyebrow">Role assignment</div>' +
+      '<h2>The lots have been cast</h2>' +
+      '<p class="small">This screen is just for you — your bot opponents don\'t need one.</p>' +
+      '<button class="primary full" id="showRoleBtn">Reveal my role</button>'
+    );
+  }
+  var desc = '';
+  if(p.role==='senator'){
+    desc = 'You\'re on the Senate\'s side. Play Res Publica Decrees and try to find the hidden Conspirators before it\'s too late.';
+  } else if(p.role==='conspirator'){
+    desc = 'You\'re a Conspirator. Push Imperium Decrees, protect your Imperator, and try to get them elected Consul once things are bad enough for the Senate.';
+  } else {
+    desc = 'You\'re the Imperator — the Conspiracy\'s secret leader. If you get elected Consul after three Imperium Decrees, you win instantly. Stay under the radar.';
+  }
+  var teammates = conspiratorTeammates(p);
+  var teamHtml = '';
+  if(p.role!=='senator'){
+    if(teammates.length){
+      teamHtml = '<div class="stack"><div class="eyebrow">Your fellow conspirators</div>' +
+        teammates.map(function(t){return '<div class="playerchip">'+t.name+(t.role==='imperator'?' <span class="badge-consul">IMPERATOR</span>':'')+'</div>';}).join('') +
+      '</div>';
+    } else {
+      teamHtml = '<p class="small">You don\'t know who your fellow Conspirators are. Don\'t trust anyone, don\'t give yourself away — and be careful who you proscribe.</p>';
+    }
+  } else if(smallGame()){
+    teamHtml = '<p class="small">You don\'t know which other players are Senators like you. Be careful who you proscribe.</p>';
+  }
+  return overlayWrap(
+    '<div class="eyebrow">Your role</div>' +
+    '<div class="role-badge '+roleClass(p.role)+'">'+roleLabel(p.role)+'</div>' +
+    '<p>'+desc+'</p>' +
+    teamHtml +
+    '<button class="primary full" id="hideRoleBtn">Enter the Curia</button>'
+  );
+}
+
+function renderPhase(){
+  switch(S.phase){
+    case 'bot_wait': return renderBotWait();
+    case 'nominate': return renderNominate();
+    case 'vote': return renderVote();
+    case 'vote_result': return renderVoteResult();
+    case 'chaos_result': return renderChaosResult();
+    case 'legis_princeps_draw': return renderPrincepsDraw();
+    case 'legis_consul_draw': return renderConsulDraw();
+    case 'veto_princeps_decide': return renderVetoDecide();
+    case 'decree_result': return renderDecreeResult();
+    case 'power_intro': return renderPowerIntro();
+    case 'power_investigate_pick': return renderInvestigatePick();
+    case 'power_investigate_reveal': return renderInvestigateReveal();
+    case 'power_special_pick': return renderSpecialPick();
+    case 'power_peek_reveal': return renderPeekReveal();
+    case 'power_proscribe_pick': return renderProscribePick();
+    case 'power_proscribe_reveal': return renderProscribeReveal();
+    case 'gameover': return renderGameOver();
+    default: return '';
+  }
+}
+
+function renderBotWait(){
+  return '<div class="card center">' +
+    '<div class="eyebrow">The Curia waits</div>' +
+    '<h2>'+S.thinkingLabel+'</h2>' +
+    '<div class="dots"><span></span><span></span><span></span></div>' +
+  '</div>';
+}
+
+function renderNominate(){
+  var elig = eligibleConsuls();
+  return '<div class="card">' +
+    '<div class="eyebrow">You preside as Princeps</div>' +
+    '<h2>Nominate a Consul</h2>' +
+    '<p class="small">Pick who you want as Consul this round. Anyone who just held office recently may not be allowed.</p>' +
+    (activeTutorialTip()==='nominate' ? tutorialCalloutHtml('nominate') : '') +
+    '<div class="stack">' +
+      elig.map(function(p){
+        return '<button class="namebtn'+(S.nomineeId===p.id?' selected':'')+'" data-nominee="'+p.id+'">'+avatarHtml(p,20)+' '+p.name+'</button>';
+      }).join('') +
+    '</div>' +
+    '<select id="claimSelect-nominate" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="n_safe">I believe in this choice — they\'ve earned my trust.</option>' +
+      '<option value="n_test">I want to see how they handle it.</option>' +
+      '<option value="n_gut">Gut feeling, nothing more.</option>' +
+    '</select>' +
+    '<button class="primary full" id="confirmNomBtn" '+(S.nomineeId==null?'disabled':'')+'>Put to the Senate</button>' +
+  '</div>';
+}
+
+function renderVote(){
+  var nominee = byId(S.nomineeId);
+  // Once caution mode is well underway (im>=3, every game size — see
+  // resolveVote / inCaution), confirming the Imperator as Consul ends the
+  // game instantly. The human can't know if this nominee IS the Imperator,
+  // but they should know the stakes of an Aye vote here are categorically
+  // different than earlier in the game.
+  var riskWarning = (!smallGame() && S.im>=3) ? '<p class="small warn">This is risky now: if '+nominee.name+' is secretly the Imperator, voting them in as Consul ends the game right away for the Conspiracy — keep that in mind.</p>' : '';
+  return '<div class="card">' +
+    '<div class="eyebrow">Consul nominee</div>' +
+    '<h2>'+nominee.name+'</h2>' +
+    '<p class="small">Everyone votes out loud, so all votes are visible. Aye means yes, Nay means no.</p>' +
+    riskWarning +
+    '<div class="stack">' +
+      alivePlayers().map(function(p){
+        var v = S.votes[p.id];
+        if(!isHuman(p)){
+          return '<div class="voterow"><span>'+avatarHtml(p,20)+' '+p.name+'</span><span class="pill '+(v?'on':'')+'">'+(v?'Aye':'Nay')+'</span></div>';
+        }
+        return (activeTutorialTip()==='vote' ? tutorialCalloutHtml('vote') : '') +
+          '<div class="voterow"><span>'+avatarHtml(p,20)+' '+p.name+' (you)</span>' +
+          '<div class="togglepair">' +
+            '<button class="'+(v===true?'chosen-aye':'')+'" data-vote-id="'+p.id+'" data-vote-val="1">Aye</button>' +
+            '<button class="'+(v===false?'chosen-nay':'')+'" data-vote-id="'+p.id+'" data-vote-val="0">Nay</button>' +
+          '</div></div>';
+      }).join('') +
+    '</div>' +
+    ((function(){
+      var h = humanPlayer();
+      if(!h || !h.alive || S.votes[h.id]!==undefined) return '';
+      return '<select id="claimSelect-vote" class="select">' +
+        '<option value="">Stay silent</option>' +
+        '<optgroup label="If Aye">' +
+          '<option value="ay_trust">I trust this pairing. Aye.</option>' +
+          '<option value="ay_risk">Not without risk, but I\'ll back them. Aye.</option>' +
+          '<option value="ay_habit">Aye, same as always.</option>' +
+        '</optgroup>' +
+        '<optgroup label="If Nay">' +
+          '<option value="na_suspicious">Something about this pairing worries me. Nay.</option>' +
+          '<option value="na_caution">Too risky at this point in the game. Nay.</option>' +
+          '<option value="na_pattern">Their voting pattern doesn\'t sit right with me. Nay.</option>' +
+        '</optgroup>' +
+      '</select>';
+    })()) +
+    '<p class="small">Once everyone has voted, the result is decided right away.</p>' +
+  '</div>';
+}
+
+function renderVoteResult(){
+  var t = tallyVotes();
+  return '<div class="card center">' +
+    '<div class="eyebrow">Result</div>' +
+    '<h2>'+t.ayes+' Aye — '+t.nays+' Nay</h2>' +
+    '<h1>'+(S.voteResultPassed?'Confirmed':'Rejected')+'</h1>' +
+    (S.winner ? renderWinnerInline() : '<button class="primary full" id="voteContinueBtn">Continue</button>') +
+  '</div>';
+}
+
+function renderWinnerInline(){
+  return '<p class="small">'+S.winReason+'</p><button class="primary full" id="toGameOverBtn">See final reveal</button>';
+}
+
+function renderChaosResult(){
+  return '<div class="card center">' +
+    '<div class="eyebrow">Chaos in the Curia</div>' +
+    '<h2>Three nominations failed</h2>' +
+    '<p>Since no one could agree, the top card is played automatically: a <strong>'+(S.chaosCard==='RP'?'Res Publica':'Imperium')+' Decree</strong>. The usual limits on who can be picked next are lifted.</p>' +
+    (S.winner ? renderWinnerInline() : '<button class="primary full" id="chaosContinueBtn">Continue</button>') +
+  '</div>';
+}
+
+function renderPrincepsDraw(){
+  var n = S.discardSelection.length;
+  return '<div class="card center">' +
+    '<div class="eyebrow">Princeps &middot; you</div>' +
+    '<h2>Pick 2 decrees to hand to the Consul</h2>' +
+    '<p class="small">Tap 2 of the 3 cards to pass them forward — they\'ll be outlined once picked. Whichever card you leave unpicked is discarded, unseen by anyone else.</p>' +
+    (activeTutorialTip()==='princeps_draw' ? tutorialCalloutHtml('princeps_draw') : '') +
+    '<div class="decree-row">' +
+      S.drawnThree.map(function(c,i){
+        var sel = S.discardSelection.indexOf(i)!==-1;
+        return '<div class="decree '+(c==='RP'?'rp':'im')+(sel?' selected':'')+'" data-discard-toggle="'+i+'">'+(c==='RP'?'Res Publica':'Imperium')+'</div>';
+      }).join('') +
+    '</div>' +
+    '<p class="small">'+n+' of 2 picked'+(n===2?' — ready to hand these off.':'.')+'</p>' +
+    '<select id="claimSelect-discard" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="d_no_choice">All three cards were the same — I had no real choice to make.</option>' +
+      '<option value="d_mixed_hand">I\'m handing over a real mix — make of it what you will.</option>' +
+      '<option value="d_tough_call">That was a difficult discard. I did what I thought was right.</option>' +
+      '<option value="d_trust_me">Trust me, I discarded in good faith.</option>' +
+      '<option value="d_deflect">Whatever happens next is on the Consul, not me.</option>' +
+    '</select>' +
+    '<button class="primary full" id="confirmDiscardBtn" '+(n===2?'':'disabled')+'>Hand these to the Consul</button>' +
+  '</div>';
+}
+
+function renderConsulDraw(){
+  var canVeto = S.im>=vetoThreshold();
+  var n = S.enactSelection==null ? 0 : 1;
+  return '<div class="card center">' +
+    '<div class="eyebrow">Consul &middot; you</div>' +
+    '<h2>Pick a decree to enact</h2>' +
+    '<p class="small">Tap the card you want to push forward and enact — it\'ll be outlined once picked. The other is thrown away, unseen by anyone else.</p>' +
+    (activeTutorialTip()==='consul_draw' ? tutorialCalloutHtml('consul_draw') : '') +
+    '<div class="decree-row">' +
+      S.handedTwo.map(function(c,i){
+        var sel = S.enactSelection===i;
+        return '<div class="decree '+(c==='RP'?'rp':'im')+(sel?' selected':'')+'" data-enact-toggle="'+i+'">'+(c==='RP'?'Res Publica':'Imperium')+'</div>';
+      }).join('') +
+    '</div>' +
+    '<select id="claimSelect-enact" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="e_forced_im">I received two Imperium cards, so I had no choice.</option>' +
+      '<option value="e_forced_rp">Both cards were Res Publica — an easy call.</option>' +
+      '<option value="e_reluctant_im">I didn\'t love enacting that, but it was the better of two bad options.</option>' +
+      '<option value="e_proud_rp">Glad to strengthen the Republic with that one.</option>' +
+      '<option value="e_blame_princeps">Whatever card I got, blame whoever handed it to me.</option>' +
+    '</select>' +
+    '<button class="primary full" id="confirmEnactBtn" '+(n===1?'':'disabled')+'>Enact this decree</button>' +
+    (canVeto ? (
+      '<select id="claimSelect-vetoPropose" class="select">' +
+        '<option value="">Stay silent</option>' +
+        '<option value="v_forced_bad">Both decrees were dangerous — I\'d rather we scrap them both.</option>' +
+        '<option value="v_protect_all">Better a wasted term than a decree neither of us wants.</option>' +
+        '<option value="v_no_reason">No comment on why — just trust me on this one.</option>' +
+      '</select>' +
+      '<button class="ghost full" id="requestVetoBtn">Suggest throwing both away instead (veto)</button>'
+    ) : '') +
+  '</div>';
+}
+
+function renderVetoDecide(){
+  return '<div class="card center">' +
+    '<div class="eyebrow">Princeps &middot; you</div>' +
+    '<h2>The Consul wants to veto — throw away both cards</h2>' +
+    '<p class="small">Both cards would be thrown away and nothing gets played this round. Do you agree?</p>' +
+    '<select id="claimSelect-vetoDecide" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<optgroup label="If you agree to the veto">' +
+        '<option value="va_agree">Agreed — best we discard both and move on.</option>' +
+        '<option value="va_relief">Relief, honestly — let\'s move on.</option>' +
+        '<option value="va_reluctant">Not thrilled, but I\'ll allow it.</option>' +
+      '</optgroup>' +
+      '<optgroup label="If you refuse">' +
+        '<option value="vr_refuse">No — you drew them, you decide.</option>' +
+        '<option value="vr_own_it">You made your bed — enact it.</option>' +
+        '<option value="vr_no_games">I won\'t let us dodge this one.</option>' +
+      '</optgroup>' +
+    '</select>' +
+    '<div class="row" style="justify-content:center">' +
+      '<button class="primary" id="vetoYes">Agree to veto</button>' +
+      '<button class="ghost" id="vetoNo">Refuse — Consul must choose</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function renderDecreeResult(){
+  return '<div class="card center">' +
+    '<div class="eyebrow">Decree Enacted</div>' +
+    '<h2>'+(S.log[0]||'')+'</h2>' +
+    (S.winner ? renderWinnerInline() : '<button class="primary full" id="decreeContinueBtn">Continue</button>') +
+  '</div>';
+}
+
+function renderPowerIntro(){
+  return '<div class="card center">' +
+    '<div class="eyebrow">New power unlocked</div>' +
+    '<h2>'+POWER_LABEL[S.pendingPower]+'</h2>' +
+    '<p class="small">'+currentPrinceps().name+' is the Princeps this round, so they get to use this power.</p>' +
+    (activeTutorialTip()==='power_intro' ? tutorialCalloutHtml('power_intro') : '') +
+    '<button class="primary full" id="powerBeginBtn">Continue</button>' +
+  '</div>';
+}
+
+function renderInvestigatePick(){
+  var targets = alivePlayers().filter(function(p){return p.id!==currentPrinceps().id;});
+  return '<div class="card">' +
+    '<div class="eyebrow">Investigate Loyalty</div>' +
+    '<h2>Choose a senator to investigate</h2>' +
+    '<div class="stack">' +
+      targets.map(function(p){
+        return '<button class="namebtn" data-investigate="'+p.id+'">'+avatarHtml(p,20)+' '+p.name+(p.investigated?' (already investigated)':'')+'</button>';
+      }).join('') +
+    '</div>' +
+  '</div>';
+}
+
+function renderInvestigateReveal(){
+  return overlayWrap(
+    '<div class="eyebrow">Yours alone</div>' +
+    '<h2>'+byId(S.investigateTargetId).name+'</h2>' +
+    '<div class="role-badge '+(S.investigateResult.indexOf('Loyal')===0?'role-senator':'role-conspirator')+'">'+S.investigateResult+'</div>' +
+    '<p class="small">What will you tell the Senate, if anything?</p>' +
+    '<select id="claimSelect-investigate" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="ir_loyal">I can confirm — they\'re loyal to the Republic.</option>' +
+      '<option value="ir_enemy">I can confirm — they serve the conspiracy.</option>' +
+      '<option value="ir_private">I\'d rather keep that to myself for now.</option>' +
+      '<option value="ir_inconclusive">The result wasn\'t as clear as I\'d hoped.</option>' +
+    '</select>' +
+    '<button class="primary full" id="investigateDoneBtn">Continue</button>'
+  );
+}
+
+function renderSpecialPick(){
+  var targets = alivePlayers().filter(function(p){return p.id!==currentPrinceps().id;});
+  return '<div class="card">' +
+    '<div class="eyebrow">Call Special Comitia</div>' +
+    '<h2>Name the next Princeps</h2>' +
+    '<p class="small">Choose any senator except yourself to be the Princeps next round. Everyone sees who you pick.</p>' +
+    '<div class="stack">' +
+      targets.map(function(p){
+        return '<button class="namebtn" data-special="'+p.id+'">'+avatarHtml(p,20)+' '+p.name+'</button>';
+      }).join('') +
+    '</div>' +
+    '<select id="claimSelect-special" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="s_confident">I trust them to lead the Senate well.</option>' +
+      '<option value="s_strategic">Strategic pick for what\'s coming.</option>' +
+      '<option value="s_gut">Just a hunch.</option>' +
+    '</select>' +
+  '</div>';
+}
+
+function renderPeekReveal(){
+  return overlayWrap(
+    '<div class="eyebrow">Yours alone</div>' +
+    '<h2>The next three decrees, in order</h2>' +
+    '<div class="decree-row">' +
+      S.peekCards.map(function(c){
+        return '<div class="decree '+(c==='RP'?'rp':'im')+'" style="cursor:default">'+(c==='RP'?'Res Publica':'Imperium')+'</div>';
+      }).join('') +
+    '</div>' +
+    '<button class="primary full" id="peekDoneBtn">Continue</button>'
+  );
+}
+
+function renderProscribePick(){
+  var targets = alivePlayers().filter(function(p){return p.id!==currentPrinceps().id;});
+  if(S.proscribeConfirmId){
+    // Small secondary step, not a preventive gate — one extra tap to catch
+    // misclicks, nothing more. The claim (if any) was already chosen on the
+    // previous screen and just rides along in S.proscribePendingClaim.
+    var t = byId(S.proscribeConfirmId);
+    return '<div class="card">' +
+      '<div class="eyebrow">Proscribe</div>' +
+      '<h2>Proscribe '+t.name+'?</h2>' +
+      '<p class="small warn">This can\'t be undone — they\'re out for the rest of the game.</p>' +
+      '<div class="stack">' +
+        '<button class="namebtn danger" id="confirmProscribeBtn">Yes, proscribe '+t.name+'</button>' +
+        '<button class="ghost full" id="cancelProscribeBtn">Wait, let me reconsider</button>' +
+      '</div>' +
+    '</div>';
+  }
+  return '<div class="card">' +
+    '<div class="eyebrow">Proscribe</div>' +
+    '<h2>Pick a senator to remove from the game</h2>' +
+    '<p class="small">They\'re kicked out of the Senate for the rest of the game. Their true side stays secret — unless they turn out to be the Imperator.</p>' +
+    '<div class="stack">' +
+      targets.map(function(p){
+        return '<button class="namebtn danger" data-proscribe="'+p.id+'">'+avatarHtml(p,20)+' '+p.name+'</button>';
+      }).join('') +
+    '</div>' +
+    '<select id="claimSelect-proscribe" class="select">' +
+      '<option value="">Stay silent</option>' +
+      '<option value="p_certain">I am certain of this. They must be proscribed.</option>' +
+      '<option value="p_gut">It\'s a gut call, but I stand by it.</option>' +
+      '<option value="p_regret">I take no pleasure in this, but Rome demands it.</option>' +
+      '<option value="p_strategic">This is simply the safest move right now.</option>' +
+    '</select>' +
+    proscribeSkipHtml(currentPrinceps()) +
+  '</div>';
+}
+
+// The Skip button's own dialogue picker — separate from the proscribe
+// dropdown above, since "they must be proscribed" makes no sense on a
+// term where nobody gets removed. Lets a player (bot or human) explain
+// why they're holding off, optionally naming whoever they suspect most
+// without acting on it.
+function proscribeSkipHtml(princeps){
+  var topSuspect = topSuspectFor(princeps);
+  return '<select id="claimSelect-proscribeSkip" class="select">' +
+    '<option value="">Stay silent</option>' +
+    (topSuspect ? '<option value="ps_named_wait">I have my eye on '+topSuspect.name+', but not enough to act on it yet.</option>' : '') +
+    '<option value="ps_no_evidence">Nothing solid enough to move against anyone this term.</option>' +
+    '<option value="ps_risky">Proscribing the wrong person now would cost us more than it\'s worth.</option>' +
+    '<option value="ps_watching">I\'d rather keep watching a while longer.</option>' +
+  '</select>' +
+  '<button class="ghost full" id="skipProscribeBtn">Skip — remove no one</button>';
+}
+
+function renderProscribeReveal(){
+  var target = byId(S.proscribeTargetId);
+  if(S.winner){
+    var badge = target.role==='imperator'
+      ? '<div class="role-badge role-imperator">The Imperator</div>'
+      : '';
+    return '<div class="card center">' +
+      '<div class="eyebrow">Proscription</div>' +
+      '<h2>'+target.name+' has been proscribed</h2>' +
+      badge +
+      '<p class="small">'+S.winReason+'</p>' +
+      '<button class="primary full" id="toGameOverBtn">See final reveal</button>' +
+    '</div>';
+  }
+  return '<div class="card center">' +
+    '<div class="eyebrow">Proscription</div>' +
+    '<h2>'+target.name+' has been proscribed</h2>' +
+    '<p class="small">The Senate doesn\'t find out which side they were on. The game goes on.</p>' +
+    '<button class="primary full" id="proscribeContinueBtn">Continue</button>' +
+  '</div>';
+}
+
+function renderGameOver(){
+  if(!S.historySaved){ saveGameToHistory(); S.historySaved = true; }
+  var senateWin = S.winner==='senate';
+  var h = humanPlayer();
+  var betrayed = h && S.betrayal && S.betrayal.playerId===h.id;
+  var youWon = h && !betrayed && ((senateWin && h.team==='senate') || (!senateWin && h.team==='conspiracy'));
+  var personalNote = '';
+  if(betrayed){
+    personalNote = '<p class="small">But you personally lose: you removed your own teammate, '+S.betrayal.targetName+', whether you meant to or not. That was kept hidden until now.</p>';
+  } else if(h){
+    personalNote = '<p class="small">'+(youWon?'You were on the winning side.':'You were on the losing side.')+'</p>';
+  }
+  return '<div class="card center">' +
+    '<div class="eyebrow">'+(senateWin?'The Republic Endures':'Rome Has Fallen')+'</div>' +
+    '<h1 style="font-size:1.8rem">'+(senateWin?'The Senate wins':'The Conspirators win')+'</h1>' +
+    '<p>'+S.winReason+'</p>' +
+    personalNote +
+  '</div>' +
+  '<div class="card">' +
+    '<h3>Full reveal</h3>' +
+    '<div class="stack">' +
+      S.players.map(function(p){
+        var label = roleLabel(p.role) + (p.isHuman?' (you)':'');
+        return '<div class="spread playerchip'+(p.alive?'':' dead')+'"><span>'+avatarHtml(p,36)+' '+p.name+'</span><span class="pill" style="background:var(--'+ (p.role==='senator'?'republic':(p.role==='conspirator'?'imperium':'tyrian')) +');color:#fff;border:none">'+label+'</span></div>';
+      }).join('') +
+    '</div>' +
+  '</div>' +
+  (S.investigateLog.length||S.peekLog.length ? (
+  '<div class="card">' +
+    '<h3>Investigations &amp; Foresight</h3>' +
+    '<div class="stack">' +
+      S.investigateLog.map(function(e){
+        return '<div class="spread playerchip"><span>'+e.investigatorName+' &rarr; '+e.targetName+'</span><span class="pill" style="background:var(--'+(e.result.indexOf('Loyal')===0?'republic':'imperium')+');color:#fff;border:none">'+e.result+'</span></div>';
+      }).join('') +
+      S.peekLog.map(function(e){
+        return '<div class="spread playerchip"><span>'+e.name+' foresaw the next three decrees</span><span class="pill">Foresight</span></div>';
+      }).join('') +
+    '</div>' +
+  '</div>'
+  ) : '') +
+  renderSuspicionHtml(buildGameRecord().suspicion) +
+  fullRecapHtml() +
+  '<button class="ghost full" id="copyThisGameBtn">Copy this game\'s full record</button>' +
+  '<button class="primary full" id="newGameBtn">New Game</button>';
+}
+
+// The detailed, chronological (oldest-first) blow-by-blow — every
+// nomination, vote, decree (with who enacted it), veto, investigation and
+// proscription, in the order they happened. Collapsed by default so the
+// game-over screen isn't dominated by it; opt in with the dropdown.
+function fullRecapHtml(){
+  if(!S.log.length) return '';
+  var chronological = S.log.slice().reverse();
+  return '<details class="card"><summary>Full round-by-round recap ('+chronological.length+' events)</summary>' +
+    '<div class="log">' + chronological.map(function(l,i){return '<div>'+(i+1)+'. '+l+'</div>';}).join('') + '</div>' +
+  '</details>';
+}
+
+// Each living player's own final, private suspicion reading of everyone
+// else — real numbers, not a reconstruction. Only shown here, after the
+// game (and the full role reveal) is already over. The human's own card is
+// always included (even if they were proscribed — see buildGameRecord) and
+// opened by default, since it's specifically theirs and easy to otherwise
+// miss among a full table of bot readings.
+function renderSuspicionHtml(suspicion){
+  if(!suspicion || !suspicion.length) return '';
+  return '<div class="card"><h3>Final trust readings</h3>' +
+    '<p class="small">A private score (0-100) for how suspicious each surviving player thought everyone else looked, right when the game ended — higher means "looked more like a Conspirator." Nobody could see this during the game.</p>' +
+    '<div class="stack">' +
+      suspicion.map(function(observer){
+        return '<details'+(observer.isHuman?' open':'')+'><summary>As seen by '+observer.name+(observer.isHuman?' (you)':'')+(observer.alive?'':' (removed)')+'</summary>' +
+          observer.readings.slice().sort(function(a,b){ return b.score-a.score; }).map(function(r){
+            var row = '<div>&mdash; '+r.name+(r.alive?'':' (removed)')+': <strong>'+r.score+'</strong>'+(r.confirmed?' ('+r.confirmed+')':'')+'</div>';
+            if(observer.isHuman) row += trustExplainHtml(r.name);
+            return row;
+          }).join('') +
+        '</details>';
+      }).join('') +
+    '</div>' +
+  '</div>';
+}
+
+// Only for the human's own trust readings: a small, dismissible-by-default
+// breakdown of the fair, public evidence available on this one player —
+// what a careful player could legitimately have noticed, reconstructed
+// from the actual game record (never from hidden roles). Purely
+// explanatory — it changes nothing about the score itself.
+function trustExplainHtml(targetName){
+  var target = S.players.filter(function(p){ return p.name===targetName; })[0];
+  if(!target) return '';
+  var lines = [];
+  var entries = S.enactmentHistory || [];
+  var asConsul = entries.filter(function(e){ return !e.isChaos && e.consulName===target.name; });
+  var asPrinceps = entries.filter(function(e){ return !e.isChaos && e.princepsName===target.name; });
+  if(asConsul.length){
+    var imC = asConsul.filter(function(e){return e.card==='IM';}).length;
+    var rpC = asConsul.filter(function(e){return e.card==='RP';}).length;
+    lines.push('Served as Consul '+asConsul.length+' time'+(asConsul.length===1?'':'s')+' — enacted '+imC+' Imperium and '+rpC+' Res Publica decree'+((imC+rpC)===1?'':'s')+'.');
+  }
+  if(asPrinceps.length){
+    var imP = asPrinceps.filter(function(e){return e.card==='IM';}).length;
+    var rpP = asPrinceps.filter(function(e){return e.card==='RP';}).length;
+    lines.push('Served as Princeps '+asPrinceps.length+' time'+(asPrinceps.length===1?'':'s')+' — the Consul enacted '+imP+' Imperium and '+rpP+' Res Publica decree'+((imP+rpP)===1?'':'s')+' from what they were handed.');
+  }
+  var investigatedBy = (S.investigateLog||[]).filter(function(e){return e.targetName===target.name;}).map(function(e){return e.investigatorName;});
+  if(investigatedBy.length) lines.push('Investigated by: '+investigatedBy.join(', ')+' — their private result, unless it was yours (see "My confirmed intel" during play).');
+  var nayFrom = (target.nayVotesReceived||[]).map(function(id){ var v=byId(id); return v?v.name:null; }).filter(function(x){return x;});
+  if(nayFrom.length) lines.push('Received a Nay vote, at some point, from: '+nayFrom.join(', ')+' — a public fact anyone could have weighed.');
+  if(!target.alive){
+    var plines = (S.log||[]).filter(function(l){ return l.indexOf('proscribes '+target.name+'.')!==-1; });
+    lines.push(plines.length ? plines[0] : (target.name+' was removed from the game before it ended.'));
+  }
+  if(!lines.length) lines.push('Nothing stood out about them publicly — this score mostly reflects voting patterns and instinct, which won\'t always leave a clean paper trail.');
+  return '<details style="margin:2px 0 8px 14px"><summary class="small">What this is based on</summary>' +
+    '<div class="small" style="margin-top:4px">' + lines.map(function(l){return '<div>&mdash; '+l+'</div>';}).join('') + '</div>' +
+  '</details>';
+}
+
+/* ---------- Events ---------- */
+function wireEvents(){
+  var app = document.getElementById('app');
+
+  var humanNameInput = document.getElementById('humanNameInput');
+  if(humanNameInput) humanNameInput.oninput = function(){ S.humanName = this.value; };
+
+  var personalNotesArea = document.getElementById('personalNotesArea');
+  if(personalNotesArea) personalNotesArea.oninput = function(){ S.personalNotes = this.value; };
+  var notesCard = app.querySelector('.notesCard');
+  if(notesCard) notesCard.ontoggle = function(){ notesPanelOpen = this.open; };
+
+  app.querySelectorAll('[data-tutorial-dismiss]').forEach(function(b){
+    b.onclick = function(){ S.tutorialSeen[this.getAttribute('data-tutorial-dismiss')] = true; render(); };
+  });
+  var tutorialBtn = document.getElementById('tutorialBtn');
+  if(tutorialBtn) tutorialBtn.onclick = function(){
+    // Smallest, plainest possible table: you + 1 bot Senator + 1 bot
+    // Conspirator. No Imperator to explain yet, and (see beginReveal /
+    // p.sleeper) bots play their own side straight — no sleepers, no
+    // false "I had no choice" claims — so the one thing a new player is
+    // learning (reading a straightforward Conspirator) stays legible.
+    S.count = 3; S.includeImperator = false; S.difficulty = 'medium'; S.speed = 'off';
+    S.tutorialMode = true; S.tutorialSeen = {};
+    beginReveal();
+  };
+
+  app.querySelectorAll('[data-count]').forEach(function(b){
+    b.onclick = function(){ S.count = parseInt(this.getAttribute('data-count'),10); render(); };
+  });
+  app.querySelectorAll('[data-imperator]').forEach(function(b){
+    b.onclick = function(){ S.includeImperator = this.getAttribute('data-imperator')==='1'; render(); };
+  });
+  app.querySelectorAll('[data-speed]').forEach(function(b){
+    b.onclick = function(){ S.speed = this.getAttribute('data-speed'); render(); };
+  });
+  app.querySelectorAll('[data-difficulty]').forEach(function(b){
+    b.onclick = function(){ S.difficulty = this.getAttribute('data-difficulty'); render(); };
+  });
+  app.querySelectorAll('[data-copy-history]').forEach(function(b){
+    b.onclick = function(){
+      var idx = parseInt(this.getAttribute('data-copy-history'),10);
+      var history = loadGameHistory();
+      var record = history[idx];
+      if(record) copyTextToClipboard(formatGameRecordText(record), this);
+    };
+  });
+  var copyThisGameBtn = document.getElementById('copyThisGameBtn');
+  if(copyThisGameBtn) copyThisGameBtn.onclick = function(){ copyTextToClipboard(formatGameRecordText(buildGameRecord()), this); };
+  var beginBtn = document.getElementById('beginBtn');
+  if(beginBtn) beginBtn.onclick = beginReveal;
+
+  var showRoleBtn = document.getElementById('showRoleBtn');
+  if(showRoleBtn) showRoleBtn.onclick = function(){ S.revealShown = true; render(); };
+  var hideRoleBtn = document.getElementById('hideRoleBtn');
+  if(hideRoleBtn) hideRoleBtn.onclick = function(){ beginNomination(); };
+
+  app.querySelectorAll('[data-nominee]').forEach(function(b){
+    b.onclick = function(){ S.nomineeId = parseInt(this.getAttribute('data-nominee'),10); render(); };
+  });
+  var confirmNomBtn = document.getElementById('confirmNomBtn');
+  if(confirmNomBtn) confirmNomBtn.onclick = function(){
+    var sel = document.getElementById('claimSelect-nominate');
+    var claimId = sel && sel.value ? sel.value : null;
+    botSpeak(currentPrinceps(), 'nominate', claimId, byId(S.nomineeId) ? byId(S.nomineeId).name : null);
+    confirmNomination();
+  };
+
+  app.querySelectorAll('[data-vote-id]').forEach(function(b){
+    b.onclick = function(){
+      var sel = document.getElementById('claimSelect-vote');
+      var claimId = sel && sel.value ? sel.value : null;
+      castVote(parseInt(this.getAttribute('data-vote-id'),10), this.getAttribute('data-vote-val')==='1', claimId);
+    };
+  });
+  app.querySelectorAll('[data-top-vote-val]').forEach(function(b){
+    b.onclick = function(){
+      var hp = humanPlayer();
+      if(hp) castVote(hp.id, this.getAttribute('data-top-vote-val')==='1');
+    };
+  });
+  var voteContinueBtn = document.getElementById('voteContinueBtn');
+  if(voteContinueBtn) voteContinueBtn.onclick = function(){ fireContinue(afterVoteResultContinue); };
+  var chaosContinueBtn = document.getElementById('chaosContinueBtn');
+  if(chaosContinueBtn) chaosContinueBtn.onclick = function(){ fireContinue(afterChaosContinue); };
+
+  app.querySelectorAll('[data-discard-toggle]').forEach(function(b){
+    b.onclick = function(){
+      var idx = parseInt(this.getAttribute('data-discard-toggle'),10);
+      var at = S.discardSelection.indexOf(idx);
+      if(at!==-1){
+        S.discardSelection.splice(at,1);
+      } else if(S.discardSelection.length<2){
+        S.discardSelection.push(idx);
+      }
+      render();
+    };
+  });
+  var confirmDiscardBtn = document.getElementById('confirmDiscardBtn');
+  if(confirmDiscardBtn) confirmDiscardBtn.onclick = function(){
+    if(S.discardSelection.length!==2) return;
+    // The one card NOT picked to hand forward is the one discarded.
+    var discardIdx = [0,1,2].filter(function(i){ return S.discardSelection.indexOf(i)===-1; })[0];
+    var sel = document.getElementById('claimSelect-discard');
+    var claimId = sel && sel.value ? sel.value : null;
+    princepsDiscard(discardIdx, claimId);
+  };
+
+  app.querySelectorAll('[data-enact-toggle]').forEach(function(b){
+    b.onclick = function(){
+      var idx = parseInt(this.getAttribute('data-enact-toggle'),10);
+      S.enactSelection = (S.enactSelection===idx) ? null : idx;
+      render();
+    };
+  });
+  var confirmEnactBtn = document.getElementById('confirmEnactBtn');
+  if(confirmEnactBtn) confirmEnactBtn.onclick = function(){
+    if(S.enactSelection==null) return;
+    var sel = document.getElementById('claimSelect-enact');
+    var claimId = sel && sel.value ? sel.value : null;
+    consulEnact(S.enactSelection, claimId);
+  };
+  var requestVetoBtn = document.getElementById('requestVetoBtn');
+  if(requestVetoBtn) requestVetoBtn.onclick = function(){
+    var sel = document.getElementById('claimSelect-vetoPropose');
+    var claimId = sel && sel.value ? sel.value : null;
+    consulRequestVeto(claimId);
+  };
+
+  var vetoYes = document.getElementById('vetoYes');
+  if(vetoYes) vetoYes.onclick = function(){
+    var sel = document.getElementById('claimSelect-vetoDecide');
+    var claimId = sel && sel.value ? sel.value : null;
+    princepsAcceptVeto(true, claimId);
+  };
+  var vetoNo = document.getElementById('vetoNo');
+  if(vetoNo) vetoNo.onclick = function(){
+    var sel = document.getElementById('claimSelect-vetoDecide');
+    var claimId = sel && sel.value ? sel.value : null;
+    princepsAcceptVeto(false, claimId);
+  };
+
+  var decreeContinueBtn = document.getElementById('decreeContinueBtn');
+  if(decreeContinueBtn) decreeContinueBtn.onclick = function(){ fireContinue(afterDecreeContinue); };
+
+  var powerBeginBtn = document.getElementById('powerBeginBtn');
+  if(powerBeginBtn) powerBeginBtn.onclick = function(){ fireContinue(beginPower); };
+
+  app.querySelectorAll('[data-investigate]').forEach(function(b){
+    b.onclick = function(){ investigatePick(parseInt(this.getAttribute('data-investigate'),10)); };
+  });
+  var investigateDoneBtn = document.getElementById('investigateDoneBtn');
+  if(investigateDoneBtn) investigateDoneBtn.onclick = function(){
+    var sel = document.getElementById('claimSelect-investigate');
+    var claimId = sel && sel.value ? sel.value : null;
+    fireContinue(function(){ finishInvestigate(claimId); });
+  };
+
+  app.querySelectorAll('[data-special]').forEach(function(b){
+    b.onclick = function(){
+      var sel = document.getElementById('claimSelect-special');
+      var claimId = sel && sel.value ? sel.value : null;
+      specialElectionPick(parseInt(this.getAttribute('data-special'),10), claimId);
+    };
+  });
+
+  var peekDoneBtn = document.getElementById('peekDoneBtn');
+  if(peekDoneBtn) peekDoneBtn.onclick = function(){ fireContinue(finishPeek); };
+
+  app.querySelectorAll('[data-proscribe]').forEach(function(b){
+    b.onclick = function(){
+      var sel = document.getElementById('claimSelect-proscribe');
+      var claimId = sel && sel.value ? sel.value : null;
+      // Non-preventive secondary step: don't proscribe yet, just ask once.
+      S.proscribeConfirmId = parseInt(this.getAttribute('data-proscribe'),10);
+      S.proscribePendingClaim = claimId;
+      render();
+    };
+  });
+  var confirmProscribeBtn = document.getElementById('confirmProscribeBtn');
+  if(confirmProscribeBtn) confirmProscribeBtn.onclick = function(){
+    var id = S.proscribeConfirmId, claimId = S.proscribePendingClaim;
+    S.proscribeConfirmId = null; S.proscribePendingClaim = null;
+    proscribePick(id, claimId);
+  };
+  var cancelProscribeBtn = document.getElementById('cancelProscribeBtn');
+  if(cancelProscribeBtn) cancelProscribeBtn.onclick = function(){
+    S.proscribeConfirmId = null; S.proscribePendingClaim = null;
+    render();
+  };
+  var skipProscribeBtn = document.getElementById('skipProscribeBtn');
+  if(skipProscribeBtn) skipProscribeBtn.onclick = function(){
+    var sel = document.getElementById('claimSelect-proscribeSkip');
+    var claimId = sel && sel.value ? sel.value : null;
+    skipProscribe(claimId);
+  };
+  var proscribeContinueBtn = document.getElementById('proscribeContinueBtn');
+  if(proscribeContinueBtn) proscribeContinueBtn.onclick = function(){ fireContinue(finishProscribe); };
+  var toGameOverBtn = document.getElementById('toGameOverBtn');
+  if(toGameOverBtn) toGameOverBtn.onclick = function(){ fireContinue(goToGameOver); };
+
+  var newGameBtn = document.getElementById('newGameBtn');
+  if(newGameBtn) newGameBtn.onclick = function(){
+    var count = S.count;
+    var humanName = S.humanName;
+    var includeImperator = S.includeImperator;
+    var speed = S.speed;
+    var difficulty = S.difficulty;
+    S = {
+      phase:'setup', count:count, includeImperator:includeImperator, humanName:humanName, speed:speed, difficulty:difficulty, historySaved:false, players:[], revealShown:false,
+      princepsIndex:0, consulId:null, nomineeId:null, previousConsulId:null, previousPrincepsId:null,
+      votes:{}, electionTracker:0, rp:0, im:0, deck:[], discardPile:[], drawnThree:[],
+      handedTwo:[], vetoRequested:false, pendingPower:null,
+      investigateTargetId:null, investigateResult:null, specialElectionPicked:null, specialElectionActive:false,
+      proscribeTargetId:null, peekCards:[], thinkingLabel:'', lastSpeech:null, log:[], winner:null, winReason:'', betrayal:null,
+      investigateLog:[], peekLog:[], publicNotices:[], investigateVouches:{}, enactmentHistory:[],
+      personalNotes:'', tutorialMode:false, tutorialStep:0, tutorialSeen:{},
+      proscribeConfirmId:null, proscribePendingClaim:null,
+      discardSelection:[], enactSelection:null
+    };
+    startSetup();
+  };
+}
+
+/* ---------- Boot ---------- */
+function start(initial){
+  if(initial && initial.phase){
+    S = initial;
+  } else {
+    startSetup();
+    return;
+  }
+  render();
+}
+
+try{
+  if(window.claude && window.claude.hot && window.claude.hot.ready){
+    window.claude.hot.ready(start);
+  } else {
+    start(window.claude && window.claude.hot ? window.claude.hot.data : null);
+  }
+}catch(e){
+  startSetup();
+}
+})();
+</script>
+
+</body></html>
